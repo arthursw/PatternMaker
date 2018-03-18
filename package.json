@@ -3,13 +3,19 @@
   "version": "1.0.0",
   "description": "PatternMaker is a modular pattern generator.",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "paper": "^0.11.5"
+  },
   "devDependencies": {
+    "@types/paper": "^0.9.15",
     "ts-loader": "^4.1.0",
     "typescript": "^2.7.2"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config webpack.config.js",
+    "start-simple": "serve",
+    "start": "webpack-dev-server"
   },
   "repository": {
     "type": "git",
