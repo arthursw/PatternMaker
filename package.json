@@ -9,13 +9,14 @@
   "devDependencies": {
     "@types/paper": "^0.9.15",
     "ts-loader": "^4.1.0",
-    "typescript": "^2.7.2"
+    "typescript": "^2.7.2",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.12"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --config webpack.config.js",
-    "start-simple": "serve",
-    "start": "webpack-dev-server"
+    "build": "webpack --config webpack.config.js --watch",
+    "start-simple": "serve"
   },
   "repository": {
     "type": "git",
