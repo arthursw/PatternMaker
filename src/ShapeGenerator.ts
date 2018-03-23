@@ -133,8 +133,8 @@ export class RandomShapeGenerator extends ShapeGenerator {
 		let rectangleParameterProbabilities: ParameterProbability[] = []
 		rectangleParameterProbabilities.push( { parameters: null, probability: 0 } )
 		rectangleParameterProbabilities.push( { parameters: {sizeRatio: 0.5 }, probability: 0 } )
-		// rectangleParameterProbabilities.push( { parameters: {widthRatio: 1, heightRatio: 0.3333 }, probability: 0 } )
-		// rectangleParameterProbabilities.push( { parameters: {widthRatio: 0.3333, heightRatio: 1 }, probability: 0 } )
+		rectangleParameterProbabilities.push( { parameters: {widthRatio: 1, heightRatio: 0.3333 }, probability: 0 } )
+		rectangleParameterProbabilities.push( { parameters: {widthRatio: 0.3333, heightRatio: 1 }, probability: 0 } )
 		this.shapeProbabilities.push( { shape: new RectangleGenerator(colorGenerator), parameterProbabilities: rectangleParameterProbabilities })
 		
 		let circleParameterProbabilities: ParameterProbability[] = []
@@ -147,15 +147,15 @@ export class RandomShapeGenerator extends ShapeGenerator {
 		// 6 5 4
 
 		let polygonOnBoxParameterProbabilities: ParameterProbability[] = []
-		// polygonOnBoxParameterProbabilities.push( { parameters: {vertexIndices: [1, 4, 6]}, probability: 0 } )
-		// polygonOnBoxParameterProbabilities.push( { parameters: {vertexIndices: [0, 2, 5]}, probability: 0 } )
-		// polygonOnBoxParameterProbabilities.push( { parameters: {vertexIndices: [0, 3, 6]}, probability: 0 } )
-		// polygonOnBoxParameterProbabilities.push( { parameters: {vertexIndices: [2, 4, 7]}, probability: 0 } )
+		polygonOnBoxParameterProbabilities.push( { parameters: {vertexIndices: [1, 4, 6]}, probability: 0 } )
+		polygonOnBoxParameterProbabilities.push( { parameters: {vertexIndices: [0, 2, 5]}, probability: 0 } )
+		polygonOnBoxParameterProbabilities.push( { parameters: {vertexIndices: [0, 3, 6]}, probability: 0 } )
+		polygonOnBoxParameterProbabilities.push( { parameters: {vertexIndices: [2, 4, 7]}, probability: 0 } )
 
-		// polygonOnBoxParameterProbabilities.push( { parameters: {vertexIndices: [0, 2, 6]}, probability: 0 } )
-		// polygonOnBoxParameterProbabilities.push( { parameters: {vertexIndices: [2, 4, 6]}, probability: 0 } )
-		// polygonOnBoxParameterProbabilities.push( { parameters: {vertexIndices: [0, 2, 4]}, probability: 0 } )
-		// polygonOnBoxParameterProbabilities.push( { parameters: {vertexIndices: [4, 6, 0]}, probability: 0 } )
+		polygonOnBoxParameterProbabilities.push( { parameters: {vertexIndices: [0, 2, 6]}, probability: 0 } )
+		polygonOnBoxParameterProbabilities.push( { parameters: {vertexIndices: [2, 4, 6]}, probability: 0 } )
+		polygonOnBoxParameterProbabilities.push( { parameters: {vertexIndices: [0, 2, 4]}, probability: 0 } )
+		polygonOnBoxParameterProbabilities.push( { parameters: {vertexIndices: [4, 6, 0]}, probability: 0 } )
 
 		polygonOnBoxParameterProbabilities.push( { parameters: {vertexIndices: [0, 2, 8]}, probability: 0 } )
 		polygonOnBoxParameterProbabilities.push( { parameters: {vertexIndices: [2, 4, 8]}, probability: 0 } )
