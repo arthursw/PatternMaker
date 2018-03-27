@@ -10,7 +10,37 @@
 
 	</head>
 	<body>
+
+		<div id="tools" class="flex-row">
+			<div class="handle">
+				<button class="arrow"><div class="arrow-left"></div></button>
+			</div>
+			<div class="main">
+				<div class="file-select flex-row">
+					<span>File: </span>
+					<select>
+						<option value="loadFile">Load file...</option>
+					</select>
+					<input type="file" accept="application/json" class="file-input" />
+				</div>
+				<div class="tabs flex-row">
+					<button class="JSON">JSON</button>
+					<button class="GUI">GUI</button>
+				</div>
+				<div class="content relative">
+					<div id="json-editor"></div>
+					<div id="gui-container">
+						<div id="gui"></div>
+					</div>
+				</div>
+				<div class="save">
+					<button class="JSON">Save JSON</button>
+					<button class="SVG">Save SVG</button>
+				</div>
+			</div>
+		</div>
 		<canvas id="canvas"></canvas>
+
 		<script src="dist/bundle.js"></script>
 	</body>
 </html>

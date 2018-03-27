@@ -8,13 +8,164 @@ body {
 	display: flex;
 	flex-direction: row;
 }
+
+button {
+	cursor: pointer;
+}
+
+.flex-row {
+	display: flex;
+	direction: row;
+}
+
+.flex-column {
+	display: flex;
+	direction: column;
+}
+
+.stretch {
+	justify-content: stretch;
+}
+
+.relative {
+	position: relative;
+}
+
+.grow {
+	flex-grow: 1;
+}
+
 #gui {
 	width: 300px;
-}
-#canvas {
-	width: 100%;
 }
 
 .dg .cr.function .property-name {
 	width: 100%;
+}
+
+#gui-container {
+	
+}
+
+#gui {
+	
+}
+
+#gui .dg.main {
+	overflow-y: scroll;
+}
+
+#gui .dg .selector {
+	position: absolute;
+	bottom: 20px;
+}
+
+#json-editor {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+#canvas {
+	position: absolute;
+	left: 50%;
+	width: 50%;
+	top: 0;
+	bottom: 0;
+}
+
+.dg .cr.function .property-name {
+	width: 100%;
+}
+
+#tools { 
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	width: 50%;
+}
+
+#tools .handle {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	width: 10px;
+	cursor: ew-resize;
+	background-color: #FDF6E3;
+	user-select: none;
+}
+
+#tools .handle > .button {
+	position: absolute;
+	width: 100%;
+	height: 20px;
+	border-radius: 0px;
+}
+
+#tools .main {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 10px;
+	display: grid;
+	grid-template-rows: 25px 25px auto 25px;
+	grid-gap: 1px;
+	background-color: #FDF6E3;
+}
+
+#tools .main > div {
+	padding: 5px;
+}
+
+#tools .main .file-select select {
+	margin-left: 5px;
+}
+
+#tools .main .tabs {
+
+}
+
+#gui .close-button {
+	display: none;
+}
+
+.arrow-up {
+	width: 0; 
+	height: 0; 
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+
+	border-bottom: 5px solid black;
+}
+
+.arrow-down {
+	width: 0; 
+	height: 0; 
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+
+	border-top: 5px solid black;
+}
+
+.arrow-right {
+	width: 0; 
+	height: 0; 
+	border-top: 5px solid transparent;
+	border-bottom: 5px solid transparent;
+
+	border-left: 5px solid black;
+}
+
+.arrow-left {
+	width: 0; 
+	height: 0; 
+	border-top: 5px solid transparent;
+	border-bottom: 5px solid transparent; 
+
+	border-right: 5px solid black; 
 }

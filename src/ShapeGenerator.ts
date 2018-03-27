@@ -1,11 +1,12 @@
-import { Symbol } from './Placer'
-import { ColorGenerator } from './ColorGenerator'
+import { Symbol, SymbolConstructor } from './Placer'
+import { ColorGenerator, colorGenerators } from './ColorGenerator'
 
 export interface ShapeGeneratorInterface extends Symbol {
 }
 
 export class ShapeGenerator implements ShapeGeneratorInterface {
 	colorGenerator: ColorGenerator
+
 	constructor(colorGenerator: ColorGenerator) {
 		this.colorGenerator = colorGenerator
 	}
@@ -20,30 +21,36 @@ export class ShapeGenerator implements ShapeGeneratorInterface {
 	}
 }
 
+export let symbolGenerators = new Map<string, SymbolConstructor>()
+
 export class RectangleGenerator extends ShapeGenerator {
 	
-	constructor(colorGenerator: ColorGenerator) {
-		super(colorGenerator)
+	static parameters = {
+		width: 0.5,
+		height: 0.5
+	}
+
+	static createGUI(gui: dat.GUI) {
+		gui.add(this.parameters, 'width').name('Width')
+		gui.add(this.parameters, 'height').name('Height')
+	}
+
+	constructor(parameters: { colorGenerator?: ColorGenerator }) {
+		super(parameters.colorGenerator)
+	}
+
+	intializeSize(bounds: paper.Rectangle, parameters: any) {
+		bounds.width = parameters.width * bounds.width
+		bounds.height = parameters.height * bounds.height
 	}
 
 	next(item: paper.Path, container: paper.Path, positions: number[] = [], parameters: { width?: number, height?: number, size?: number, widthRatio?: number, heightRatio?: number, sizeRatio?: number } = null): paper.Path {
 		let bounds = item.bounds.clone()
 		if(parameters != null) {
-			let width = bounds.width
-			let height = bounds.height
-			if((parameters.width != null && parameters.height != null) || parameters.size != null) {
-				width = parameters.width != null ? parameters.width : parameters.size
-				height = parameters.height != null ? parameters.height : parameters.size
-				
-			} else if((parameters.widthRatio != null && parameters.heightRatio != null) || parameters.sizeRatio != null) {
-				width = parameters.widthRatio != null ? parameters.widthRatio * bounds.width : parameters.sizeRatio * bounds.width
-				height = parameters.heightRatio != null ? parameters.heightRatio * bounds.height : parameters.sizeRatio * bounds.width
-			}
 			let center = bounds.center.clone()
-			bounds.x = center.x - width / 2
-			bounds.y = center.y - height / 2
-			bounds.width = width
-			bounds.height = height
+			this.intializeSize(bounds, parameters)
+			bounds.x = center.x - bounds.width / 2
+			bounds.y = center.y - bounds.height / 2
 		}
 
 		let rectangle = new paper.Path.Rectangle(bounds)
@@ -53,10 +60,30 @@ export class RectangleGenerator extends ShapeGenerator {
 
 }
 
+symbolGenerators.set('rectangle', RectangleGenerator)
+
+export class RectangleAbsoluteGenerator extends ShapeGenerator {
+
+	intializeSize(bounds: paper.Rectangle, parameters: any) {
+		bounds.width = parameters.width
+		bounds.height = parameters.height
+	}
+}
+
+symbolGenerators.set('rectangle-absolute', RectangleGenerator)
+
 export class CircleGenerator extends ShapeGenerator {
 	
-	constructor(colorGenerator: ColorGenerator) {
-		super(colorGenerator)
+	static parameters = {
+		radius: 0.5
+	}
+
+	static createGUI(gui: dat.GUI) {
+		gui.add(this.parameters, 'radius').name('Radius')
+	}
+
+	constructor(parameters: { colorGenerator?: ColorGenerator }) {
+		super(parameters.colorGenerator)
 	}
 
 	next(item: paper.Path, container: paper.Path, positions: number[] = [], parameters: { radius?: number, radiusRatio?: number } = null): paper.Path {
@@ -77,12 +104,22 @@ export class CircleGenerator extends ShapeGenerator {
 
 }
 
+symbolGenerators.set('circle', CircleGenerator)
+
 export class PolygonOnBoxGenerator extends ShapeGenerator {
 	
+	static parameters = {
+		vertexIndices: ''
+	}
+
+	static createGUI(gui: dat.GUI) {
+		gui.add(this.parameters, 'vertexIndices').name('Vertex indices')
+	}
+
 	static indexToName = ['topLeft', 'topCenter', 'topRight', 'rightCenter', 'bottomRight', 'bottomCenter', 'bottomLeft', 'leftCenter', 'center']
 
-	constructor(colorGenerator: ColorGenerator) {
-		super(colorGenerator)
+	constructor(parameters: { colorGenerator?: ColorGenerator }) {
+		super(parameters.colorGenerator)
 	}
 
 	next(item: paper.Path, container: paper.Path, positions: number[] = [], parameters: { vertexIndices?: number[], vertexNames?: string[], closed?: boolean } = null): paper.Path {
@@ -112,81 +149,92 @@ export class PolygonOnBoxGenerator extends ShapeGenerator {
 
 }
 
-type ParameterProbability = {
-	parameters: any
-	probability: number
-}
+symbolGenerators.set('polygon-on-box', PolygonOnBoxGenerator)
 
 type ShapeProbability = {
-	shape: ShapeGenerator,
-	parameterProbabilities: ParameterProbability[]
+	weight: number,
+	type: string,
+	parameters: any
 }
 
 export class RandomShapeGenerator extends ShapeGenerator {
 
+	symbols: Map<string, Symbol>
 	shapeProbabilities: ShapeProbability[]
+	totalWeight: number
 
-	constructor(colorGenerator: ColorGenerator) {
-		super(colorGenerator)
-		this.shapeProbabilities = []
-		
-		let rectangleParameterProbabilities: ParameterProbability[] = []
-		rectangleParameterProbabilities.push( { parameters: null, probability: 0 } )
-		rectangleParameterProbabilities.push( { parameters: {sizeRatio: 0.5 }, probability: 0 } )
-		rectangleParameterProbabilities.push( { parameters: {widthRatio: 1, heightRatio: 0.3333 }, probability: 0 } )
-		rectangleParameterProbabilities.push( { parameters: {widthRatio: 0.3333, heightRatio: 1 }, probability: 0 } )
-		this.shapeProbabilities.push( { shape: new RectangleGenerator(colorGenerator), parameterProbabilities: rectangleParameterProbabilities })
-		
-		let circleParameterProbabilities: ParameterProbability[] = []
-		circleParameterProbabilities.push( { parameters: null, probability: 0 } )
-		circleParameterProbabilities.push( { parameters: {radiusRatio: 0.5 }, probability: 0 } )
-		this.shapeProbabilities.push( { shape: new CircleGenerator(colorGenerator), parameterProbabilities: circleParameterProbabilities })
-	
-		// 0 1 2 
-		// 7 8 3
-		// 6 5 4
+	static shapeFolders: Map<dat.GUI, dat.GUI> = new Map<dat.GUI, dat.GUI>()
+	static folder: dat.GUI = null
 
-		let polygonOnBoxParameterProbabilities: ParameterProbability[] = []
-		polygonOnBoxParameterProbabilities.push( { parameters: {vertexIndices: [1, 4, 6]}, probability: 0 } )
-		polygonOnBoxParameterProbabilities.push( { parameters: {vertexIndices: [0, 2, 5]}, probability: 0 } )
-		polygonOnBoxParameterProbabilities.push( { parameters: {vertexIndices: [0, 3, 6]}, probability: 0 } )
-		polygonOnBoxParameterProbabilities.push( { parameters: {vertexIndices: [2, 4, 7]}, probability: 0 } )
-
-		polygonOnBoxParameterProbabilities.push( { parameters: {vertexIndices: [0, 2, 6]}, probability: 0 } )
-		polygonOnBoxParameterProbabilities.push( { parameters: {vertexIndices: [2, 4, 6]}, probability: 0 } )
-		polygonOnBoxParameterProbabilities.push( { parameters: {vertexIndices: [0, 2, 4]}, probability: 0 } )
-		polygonOnBoxParameterProbabilities.push( { parameters: {vertexIndices: [4, 6, 0]}, probability: 0 } )
-
-		polygonOnBoxParameterProbabilities.push( { parameters: {vertexIndices: [0, 2, 8]}, probability: 0 } )
-		polygonOnBoxParameterProbabilities.push( { parameters: {vertexIndices: [2, 4, 8]}, probability: 0 } )
-		polygonOnBoxParameterProbabilities.push( { parameters: {vertexIndices: [4, 6, 8]}, probability: 0 } )
-		polygonOnBoxParameterProbabilities.push( { parameters: {vertexIndices: [0, 6, 8]}, probability: 0 } )
-
-		this.shapeProbabilities.push( { shape: new PolygonOnBoxGenerator(colorGenerator), parameterProbabilities: polygonOnBoxParameterProbabilities })
-		
-		for(let shapeProbability of this.shapeProbabilities) {
-			let nShapes = shapeProbability.parameterProbabilities.length
-			for(let parameterProbability of shapeProbability.parameterProbabilities) {
-				parameterProbability.probability = (1 / nShapes) / 3
+	static parameters = {
+		addShape: ()=> {
+			let folder = RandomShapeGenerator.folder.addFolder('Shape ' + RandomShapeGenerator.shapeFolders.size)
+			RandomShapeGenerator.shapeFolders.set(folder, null)
+			let parameters = {
+				weight: 1,
+				type: 'rectangle'
 			}
+			folder.add(parameters, 'weight').name('Weight')
+			RandomShapeGenerator.parameters.shapes.push({
+				weight: 1,
+				type: 'rectangle',
+				parameters: {}
+			})
+			folder.add(parameters, 'type').name('Type').onChange( (value: string)=> {
+				let SymbolGenerator = symbolGenerators.get(value)
+				let parametersFolder = RandomShapeGenerator.shapeFolders.get(folder)
+				if(parametersFolder != null) {
+					folder.remove(<any>parametersFolder)
+				}
+				parametersFolder = folder.addFolder('Parameters')
+				RandomShapeGenerator.shapeFolders.set(folder, parametersFolder)
+				SymbolGenerator.createGUI(parametersFolder)
+				parametersFolder.add({'delete': ()=> {
+					RandomShapeGenerator.folder.remove(<any>folder)
+				}}, 'delete').name('Delete shape')
+			} )
+		},
+		shapes: <ShapeProbability[]>[]
+	}
+
+	static createGUI(gui: dat.GUI) {
+		this.folder = gui.addFolder('Shape probabilities')
+		this.folder.open()
+		this.folder.add(this.parameters, 'addShape')
+	}
+
+	constructor(parameters: { colors: { type: string, parameters: any }, shapeProbabilities: ShapeProbability[] }) {
+		let ColorGen = colorGenerators.get(parameters.colors.type)
+		let colorGenerator = new ColorGen(parameters.colors.parameters)
+		super(colorGenerator)
+
+		this.symbols = new Map<string, Symbol>()
+		this.shapeProbabilities = parameters.shapeProbabilities
+		
+		this.totalWeight = 0
+		for(let shapeProbability of parameters.shapeProbabilities) {
+			let Symbol = symbolGenerators.get(shapeProbability.type)
+			let symbolParameters = {...shapeProbability.parameters, colorGenerator: colorGenerator}
+			let symbol = new Symbol(symbolParameters)
+			this.symbols.set(shapeProbability.type, symbol)
+			this.totalWeight += shapeProbability.weight
 		}
 	}
 
 	next(item: paper.Path, container: paper.Path, positions: number[] = [], parameters: any = null): paper.Path {
-		let random = Math.random()
+		let random = Math.random() * this.totalWeight
 		let sum = 0
+
 		for(let shapeProbability of this.shapeProbabilities) {
-			for(let parameterProbability of shapeProbability.parameterProbabilities) {
-				sum += parameterProbability.probability
-				if(sum > random) {
-					let itemShrinked: paper.Path = <any>item.clone()
-					itemShrinked.scale(0.8)
-					let result = shapeProbability.shape.next(itemShrinked, container, positions, parameterProbability.parameters)
-					return result
-				}
+			sum += shapeProbability.weight
+			if(sum > random) {
+				return this.symbols.get(shapeProbability.type).next(item, container, positions, shapeProbability.parameters)
 			}
 		}
+
 		return null
 	}
 
 }
+
+symbolGenerators.set('random-shape', RandomShapeGenerator)

@@ -1,10 +1,17 @@
 import * as paper from 'paper';
 
+interface ColorGeneratorConstructor {
+	new (...args: any[]): ColorGenerator;
+}
+
 export interface ColorGenerator {
 	setColor(positions: number[], item: paper.Path, container: paper.Path): void
 }
 
+export let colorGenerators = new Map<string, ColorGeneratorConstructor>()
+
 export class ThreeStripesColor implements ColorGenerator {
+
 	constructor() {
 
 	}
@@ -17,15 +24,18 @@ export class ThreeStripesColor implements ColorGenerator {
 	}
 }
 
-export class RandomColorFromPalette implements ColorGenerator {
-	colors: paper.Color[]
+colorGenerators.set('three-stripes', ThreeStripesColor)
 
-	constructor(colors: paper.Color[]) {
-		this.colors = colors
+export class RandomColorFromPalette implements ColorGenerator {
+	colors: string[]
+
+	constructor(parameters: { palette: string[] }) {
+		this.colors = parameters.palette
 	}
 
 	setColor(positions: number[], item: paper.Path, container: paper.Path): void {	
-		item.fillColor = this.colors[Math.floor(Math.random() * this.colors.length)]
-		item.fillColor.alpha = 0.5
+		item.fillColor = new paper.Color(this.colors[Math.floor(Math.random() * this.colors.length)])
 	}
 }
+
+colorGenerators.set('random-palette', RandomColorFromPalette)
