@@ -28,7 +28,7 @@ let loadFile = (fileName: string, ignoreIfAlreadyLoaded = false, setContentInEdi
 		return
 	}
 
-	$.getJSON( location.origin + "/patterns/" + fileName, ( data: any )=> {
+	$.getJSON( location.origin + location.pathname + "/patterns/" + fileName, ( data: any )=> {
 		setFile(fileName, JSON.stringify(data, null, 2), setContentInEditor)
 	});
 
