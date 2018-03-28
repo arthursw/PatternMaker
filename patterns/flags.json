@@ -1,0 +1,186 @@
+{
+  "generation": "animation",
+  "speed": 500,
+  "numberOfSymbolPerFrame": 100,
+  "size": {
+    "width": 1000,
+    "height": 1000
+  },
+  "optimizeWithRaster": false,
+  "symbol": {
+    "type": "placer",
+    "parameters": {
+      "type": "y",
+      "count": 1,
+      "symbol": {
+        "type": "placer",
+        "parameters": {
+          "type": "x",
+          "count": 1,
+          "symbol": {
+            "type": "placer",
+            "parameters": {
+              "type": "static",
+              "count": 5,
+              "symbol": {
+                "type": "random-shape",
+                "parameters": {
+                  "shapeProbabilities": [
+                    {
+                      "weight": 1,
+                      "type": "polygon-on-box",
+                      "parameters": {
+                        "vertexIndices": [
+                          0,
+                          2,
+                          8
+                        ]
+                      }
+                    },
+                    {
+                      "weight": 1,
+                      "type": "polygon-on-box",
+                      "parameters": {
+                        "vertexIndices": [
+                          2,
+                          4,
+                          8
+                        ]
+                      }
+                    },
+                    {
+                      "weight": 1,
+                      "type": "polygon-on-box",
+                      "parameters": {
+                        "vertexIndices": [
+                          7,
+                          0,
+                          1
+                        ]
+                      }
+                    },
+                    {
+                      "weight": 1,
+                      "type": "polygon-on-box",
+                      "parameters": {
+                        "vertexIndices": [
+                          1,
+                          2,
+                          3
+                        ]
+                      }
+                    },
+                    {
+                      "weight": 1,
+                      "type": "polygon-on-box",
+                      "parameters": {
+                        "vertexIndices": [
+                          3,
+                          4,
+                          5
+                        ]
+                      }
+                    },
+                    {
+                      "weight": 1,
+                      "type": "polygon-on-box",
+                      "parameters": {
+                        "vertexIndices": [
+                          5,
+                          6,
+                          7
+                        ]
+                      }
+                    },
+                    {
+                      "weight": 1,
+                      "type": "polygon-on-box",
+                      "parameters": {
+                        "vertexIndices": [
+                          6,
+                          4,
+                          8
+                        ]
+                      }
+                    },
+                    {
+                      "weight": 1,
+                      "type": "polygon-on-box",
+                      "parameters": {
+                        "vertexIndices": [
+                          0,
+                          6,
+                          8
+                        ]
+                      }
+                    },
+                    {
+                      "weight": 1,
+                      "type": "polygon-on-box",
+                      "parameters": {
+                        "vertexIndices": [
+                          0,
+                          1,
+                          5,
+                          6
+                        ]
+                      }
+                    },
+                    {
+                      "weight": 1,
+                      "type": "polygon-on-box",
+                      "parameters": {
+                        "vertexIndices": [
+                          1,
+                          2,
+                          4,
+                          5
+                        ]
+                      }
+                    },
+                    {
+                      "weight": 1,
+                      "type": "circle",
+                      "parameters": {
+                        "radius": 0.5
+                      }
+                    },
+                    {
+                      "weight": 1,
+                      "type": "rectangle",
+                      "parameters": {
+                        "width": 1,
+                        "height": 0.15
+                      }
+                    },
+                    {
+                      "weight": 1,
+                      "type": "rectangle",
+                      "parameters": {
+                        "width": 0.25,
+                        "height": 1
+                      }
+                    }
+                  ],
+                  "colors": {
+                    "type": "random-palette",
+                    "parameters": {
+                      "palette": [
+                        "#86a4d3",
+                        "#71bfbe",
+                        "#9bce6d",
+                        "#e5de45",
+                        "#fdc13d",
+                        "#f2825b"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

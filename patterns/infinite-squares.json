@@ -1,0 +1,25 @@
+{
+  "generation": "animation",
+  "speed": 500,
+  "numberOfSymbolPerFrame": 10,
+  "size": {
+    "width": 1000,
+    "height": 1000
+  },
+  "optimizeWithRaster": false,
+  "symbol": {
+    "type": "placer-z",
+    "parameters": {
+      "count": 50,
+      "scale": 0.1,
+      "margin": false,
+      "symbol": {
+        "type": "rectangle",
+        "parameters": {
+          "width": 1,
+          "height": 1
+        }
+      }
+    }
+  }
+}

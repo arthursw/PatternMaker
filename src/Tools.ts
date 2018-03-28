@@ -8,8 +8,10 @@ let editor: any = null
 let w: any = window
 w.$ = <any>$;
 
-let setFile = (fileName: string, content: string)=> {
-	editor.setValue(content)
+let setFile = (fileName: string, content: string, setContentInEditor = true)=> {
+	if(setContentInEditor) {
+		editor.setValue(content)
+	}
 
 	if( files.get(fileName) == null) {
 
@@ -21,13 +23,13 @@ let setFile = (fileName: string, content: string)=> {
 	}
 }
 
-let loadFile = (fileName: string, ignoreIfAlreadyLoaded = false)=> { 
+let loadFile = (fileName: string, ignoreIfAlreadyLoaded = false, setContentInEditor = true)=> { 
 	if(ignoreIfAlreadyLoaded && files.get(fileName) != null) {
 		return
 	}
 
-	$.getJSON( location.origin + "/" + fileName, ( data: any )=> {
-		setFile(fileName, data)
+	$.getJSON( location.origin + "/patterns/" + fileName, ( data: any )=> {
+		setFile(fileName, JSON.stringify(data, null, 2), setContentInEditor)
 	});
 
 }
@@ -52,20 +54,20 @@ let saveFilesToLocalStorage = ()=> {
 }
 
 let loadFilesFromLocalStorage = ()=> {
-	let object = JSON.parse(localStorage.get('files'))
+	let object = JSON.parse(localStorage.getItem('files'))
 	for(let fileName in object) {
 		files.set(fileName, object[fileName])
 	}
 }
 
-let defaultFiles = ['flags', 'grids', 'lines']
+let defaultFiles = ['flags.json', 'grids.json', 'infinite-squares.json', 'simple.json']
 
 let loadDefaultFiles = ()=> {
 
 	loadFilesFromLocalStorage()
 
 	for(let fileName of defaultFiles) {
-		loadFile(fileName, true)
+		loadFile(fileName, true, false)
 	}
 }
 
@@ -74,16 +76,22 @@ export let initializeEditor = (parameters: any): any => {
 	editor = ace.edit('json-editor');
 	editor.getSession().setMode('ace/mode/json');
 	editor.setTheme('ace/theme/solarized_light');
+	editor.session.setUseWrapMode(true);
+	editor.session.setTabSize(2);
 	editor.setValue(JSON.stringify(parameters, null, 2));
 	editor.clearSelection();
 	editor.session.on('change', function(delta: { start: any, end: any, lines: any, action: any}) {
 		
-
+		let parameters = null
 		try {
-			let event = new CustomEvent('changeParameters', { detail: { parameters: JSON.parse(editor.getValue()) } })
-			document.dispatchEvent(event)
+			parameters = JSON.parse(editor.getValue())
 		} catch (error) {
 			console.log(error)
+		}
+
+		if(parameters != null) {
+			let event = new CustomEvent('changeParameters', { detail: { parameters: parameters } })
+			document.dispatchEvent(event)
 		}
 
 	});
@@ -106,9 +114,11 @@ export let initializeEditor = (parameters: any): any => {
 		draggingEditorOffsetX = null
 	})
 
-	$('#tools .file-select select').on('change', (value: any)=> {
+	$('#tools .file-select select').on('change', (event: any)=> {
+		let value = event.target.value
 		if(value == 'loadFile') {
-			$('#tools .file-select .file-input').click()
+			event.preventDefault()
+			$('#file-input').trigger('click');
 		} else {
 			 setFile(value, files.get(value))
 		}
@@ -150,5 +160,6 @@ export let initializeEditor = (parameters: any): any => {
 		saveFile('pattern.svg', 'image/svg+xml', svg)
 	})
 
+	loadDefaultFiles()
 	return editor
 }

@@ -1,15 +1,13 @@
 import * as paper from 'paper'
 
 import { initializeEditor } from './Tools'
-import { Placer, Symbol } from './Placer'
+import { Bounds } from './Bounds';
+import { Symbol, SymbolConstructor } from './Symbol';
+import { Placer } from './Placer'
 import { createGUI } from './GUI'
 
 let w:any = <any>window;
 (<any>window).w = w;
-
-// 0 1 2
-// 7 8 3
-// 6 5 4
 
 let parameters = {
 	generation: 'animation',
@@ -21,137 +19,49 @@ let parameters = {
 	},
 	optimizeWithRaster: false,
 	symbol: {
-		type: 'placer',
+		type: 'placer-xyz',
 		parameters: {
-			type: 'y',
-			count: 10,
+			width: 10,
+			height: 10,
+			count: 1,
+			scale: 0.2,
+			margin: true,
 			symbol: {
-				type: 'placer',
-				parameters: {
-					type: 'x',
-					count: 10,
-					symbol: {
-						type: 'placer',
+				type: 'random-shape',
+				parameters: {		
+					shapeProbabilities: [{
+						weight: 1,
+						type: 'circle',
 						parameters: {
-							type: 'static',
-							count: 2,
-							symbol: {
-								type: 'random-shape',
-								parameters: {		
-									shapeProbabilities: [{ 
-										weight: 1,
-										type: 'polygon-on-box',
-										parameters: {
-											vertexIndices: [0, 2, 8]
-										}
-									}, {
-										weight: 1,
-										type: 'polygon-on-box',
-										parameters: {
-											vertexIndices: [2, 4, 8]
-										}
-									}, {
-										weight: 1,
-										type: 'polygon-on-box',
-										parameters: {
-											vertexIndices: [6, 4, 8]
-										}
-									}, {
-										weight: 1,
-										type: 'polygon-on-box',
-										parameters: {
-											vertexIndices: [0, 6, 8]
-										}
-									}, {
-										weight: 1,
-										type: 'circle',
-										parameters: {
-											radiusRatio: 0.5
-										}
-									}, {
-										weight: 1,
-										type: 'rectangle',
-										parameters: {
-											width: 0.5,
-											height: 0.5
-										}
-									}],
-									colors: {
-										type: 'random-palette',
-										parameters: {
-											palette: [
-												'#df768e',
-												'#b48fc0',
-												'#86a4d3',
-												'#71bfbe',
-												'#9bce6d',
-												'#e5de45',
-												'#fdc13d',
-												'#f2825b'
-											]
-										}
-									}
-								}
-							}
+							radius: 1
+						}
+					}, {
+						weight: 1,
+						type: 'rectangle',
+						parameters: {
+							width: 1,
+							height: 1
+						}
+					}],
+					colors: {
+						type: 'random-palette',
+						parameters: {
+							palette: [
+							'red',
+							'blue',
+							'green',
+							'black'
+							]
 						}
 					}
 				}
-			}	
-		}
-	}
-}
-
-
-let symbol2Parameters = {
-	type: 'grid-n',
-	parameters: {
-		countX: 10,
-		countY: 10,
-		countN: 3,
-		symbol: {
-			type: 'random-shape',
-			parameters: {
-				shapes: [{
-					type: 'polygon',
-					parameters: [ { vertices: [1, 0, 3] }, { vertices: [2, 1, 4] }, { vertices: [1, 4, 3] }],
-					probability: 0.5
-				}, {
-					type: 'circle',
-					parameters: {
-						radiusRatio: 0.5
-					},
-					probability: 0.2
-				}, {
-					type: 'square',
-					parameters: {
-						sizeRatio: 0.5
-					},
-					probability: 0.2
-				}]	
-			}
-		}
-	}
-}
-
-let symbol3Parameters = {
-	type: 'lines',
-	parameters: {
-		countX: 10,
-		countY: 10,
-		symbol: {
-			type: 'random-line-shape',
-			parameters: {
-				shapes: [{
-					type: 'polygon',
-					parameters: [ { vertices: [1, 0, 3] }, { vertices: [2, 1, 4] }, { vertices: [1, 4, 3] }],
-				}]
 			}
 		}
 	}
 }
 
 let symbol: Symbol = null
-let container: paper.Path = null
+let container: Bounds = null
 let raster: paper.Raster = null
 let timeoutID: number = null
 
@@ -170,7 +80,7 @@ let reset = ()=> {
 	paper.project.clear()
 
 	let rectangle = new paper.Rectangle(0, 0, parameters.size.width, parameters.size.height)
-	container = new paper.Path.Rectangle(rectangle)
+	container = new Bounds(rectangle)
 
 	paper.view.zoom = 1
 
@@ -196,8 +106,8 @@ let onFrame = ()=> {
 	}
 
 	for(let i = 0 ; i < parameters.numberOfSymbolPerFrame ; i++) {
-		let finished = symbol.next(<any>container.clone(), <any>container.clone())
-		if(finished == null) {
+		symbol.next(container, container)
+		if(symbol.hasFinished()) {
 			if(timeoutID == null) {
 				timeoutID = setTimeout(()=> {
 					reset()
@@ -218,6 +128,8 @@ document.addEventListener('changeParameters', (event: any) => {
 		parameters = event.detail.parameters
 	}
 	let doCreateGUI = event.detail != null && event.detail.createGUI != null ? event.detail.createGUI : null
+	clearTimeout(timeoutID)
+	timeoutID = null
 	createSymbol(doCreateGUI)
 })
 

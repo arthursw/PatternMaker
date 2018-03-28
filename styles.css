@@ -113,7 +113,7 @@ button {
 	left: 0;
 	right: 10px;
 	display: grid;
-	grid-template-rows: 25px 25px auto 25px;
+	grid-template-rows: 25px 0px auto 25px;
 	grid-gap: 1px;
 	background-color: #FDF6E3;
 }
@@ -127,7 +127,7 @@ button {
 }
 
 #tools .main .tabs {
-
+	/*display: none;*/
 }
 
 #gui .close-button {

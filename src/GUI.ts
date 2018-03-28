@@ -57,6 +57,7 @@ export let createGUI = (parameters: any, folder: dat.GUI = null) => {
 					value.startsWith('hsl(') || 
 					value.startsWith('hsla(') ||
 					CSS_COLOR_NAMES.indexOf(value.toLowerCase()) >= 0) ) {
+			parameters[name] = new paper.Color(parameters[name]).toCSS(false)
 			folder.addColor(parameters, name).onFinishChange(parameterChanged)
 		} else {
 			folder.add(parameters, name).onFinishChange(parameterChanged)

@@ -1,0 +1,51 @@
+{
+  "generation": "animation",
+  "speed": 500,
+  "numberOfSymbolPerFrame": 100,
+  "size": {
+    "width": 1000,
+    "height": 1000
+  },
+  "optimizeWithRaster": false,
+  "symbol": {
+    "type": "placer-xyz",
+    "parameters": {
+      "width": 10,
+      "height": 10,
+      "count": 1,
+      "scale": 0.2,
+      "margin": true,
+      "symbol": {
+        "type": "random-shape",
+        "parameters": {
+          "shapeProbabilities": [
+            {
+              "weight": 1,
+              "type": "circle",
+              "parameters": {
+                "radius": 1
+              }
+            },
+            {
+              "weight": 1,
+              "type": "rectangle",
+              "parameters": {
+                "width": 1,
+                "height": 1
+              }
+            }
+          ],
+          "colors": {
+            "type": "random-palette",
+            "parameters": {
+              "palette": [
+                "red",
+                "blue"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
