@@ -10,7 +10,7 @@
   "symbol": {
     "type": "placer-z",
     "parameters": {
-      "count": 50,
+      "nSymbolsToCreate": 50,
       "scale": 0.1,
       "margin": false,
       "symbol": {

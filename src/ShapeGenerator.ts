@@ -1,39 +1,37 @@
+import * as paper from 'paper';
+import { emptyFolder } from './GUI';
 import { Bounds } from './Bounds';
 import { Symbol, SymbolConstructor } from './Symbol';
 import { ColorGenerator } from './ColorGenerator';
 
 export class ShapeGenerator extends Symbol {
 	
-	constructor(parameters: { colors?: any }) {
-		super(parameters)
-		if(this.colorGenerator == null) {
-			this.colorGenerator = new ColorGenerator()
-		}
-	}
-
-	createGUI(gui: dat.GUI) {
-		this.addTypeOnGUI(gui)
+	constructor(parameters: { colors?: any }, parent?: Symbol) {
+		super(parameters, parent)
 	}
 }
 
 export class RectangleGenerator extends ShapeGenerator {
 
-	size: paper.Size
+	static defaultParameters = { width: 1, height: 1 }
 
-	constructor(parameters: { colors?: any, width?: number, height?: number }) {
-		super(parameters)
-		this.size = new paper.Size(parameters.width != null ? parameters.width : 1, parameters.height != null ? parameters.height : 1)
+	parameters: {
+		width: number,
+		height: number
 	}
 
-	createGUI(gui: dat.GUI) {
-		super.createGUI(gui)
-		gui.add(this.size, 'width', 0, 1).step(0.01).name('Width')
-		gui.add(this.size, 'height', 0, 1).step(0.01).name('Height')
+	constructor(parameters: { colors?: any, width?: number, height?: number }, parent?: Symbol) {
+		super(parameters, parent)
+	}
+
+	addGUIParameters(gui: dat.GUI) {
+		gui.add(this.parameters, 'width', 0, 1).step(0.01).name('Width')
+		gui.add(this.parameters, 'height', 0, 1).step(0.01).name('Height')
 	}
 
 	intializeSize(rectangle: paper.Rectangle) {
-		rectangle.width = this.size.width * rectangle.width
-		rectangle.height = this.size.height * rectangle.height
+		rectangle.width = this.parameters.width * rectangle.width
+		rectangle.height = this.parameters.height * rectangle.height
 	}
 
 	next(bounds: Bounds, container: Bounds, positions: number[] = []): paper.Path {
@@ -45,7 +43,7 @@ export class RectangleGenerator extends ShapeGenerator {
 		rectangle.y = center.y - rectangle.height / 2
 
 		let shape = new paper.Path.Rectangle(rectangle)
-		this.colorGenerator.setColor(positions, shape, container)
+		this.getColorGenerator().setColor(positions, shape, container)
 		return shape
 	}
 
@@ -55,9 +53,16 @@ Symbol.addSymbol(RectangleGenerator, 'rectangle')
 
 export class RectangleAbsoluteGenerator extends RectangleGenerator {
 
+	static defaultParameters = { width: 100, height: 100 }
+
 	intializeSize(bounds: paper.Rectangle) {
-		bounds.width = this.size.width
-		bounds.height = this.size.height
+		bounds.width = this.parameters.width
+		bounds.height = this.parameters.height
+	}
+
+	addGUIParameters(gui: dat.GUI) {
+		gui.add(this.parameters, 'width').name('Width')
+		gui.add(this.parameters, 'height').name('Height')
 	}
 }
 
@@ -65,26 +70,28 @@ Symbol.addSymbol(RectangleAbsoluteGenerator, 'rectangle-absolute')
 
 export class CircleGenerator extends ShapeGenerator {
 
-	radius: number
+	static defaultParameters = { radius: 1 }
 
-	constructor(parameters: { colors?: any, radius?: number }) {
-		super(parameters)
-		this.radius = parameters.radius != null ? parameters.radius : 1
+	parameters: {
+		radius: number
 	}
 
-	createGUI(gui: dat.GUI) {
-		super.createGUI(gui)
-		gui.add(this, 'radius', 0, 1).step(0.01).name('Radius')
+	constructor(parameters: { colors?: any, radius?: number }, parent?: Symbol) {
+		super(parameters, parent)
+	}
+
+	addGUIParameters(gui: dat.GUI) {
+		gui.add(this.parameters, 'radius', 0, 1).step(0.01).name('Radius')
 	}
 
 	getRadius(bounds: Bounds) {
 		let defaultRadius = Math.min(bounds.rectangle.width, bounds.rectangle.height) / 2
-		return this.radius * defaultRadius
+		return this.parameters.radius * defaultRadius
 	}
 
 	next(bounds: Bounds, container: Bounds, positions: number[] = []): paper.Path {
 		let circle = new paper.Path.Circle(bounds.rectangle.center, this.getRadius(bounds))
-		this.colorGenerator.setColor(positions, circle, container)
+		this.getColorGenerator().setColor(positions, circle, container)
 		return circle
 	}
 
@@ -94,8 +101,14 @@ Symbol.addSymbol(CircleGenerator, 'circle')
 
 export class CircleAbsoluteGenerator extends CircleGenerator {
 
+	static defaultParameters = { radius: 100 }
+
+	addGUIParameters(gui: dat.GUI) {
+		gui.add(this.parameters, 'radius').name('Radius')
+	}
+
 	getRadius(bounds: Bounds) {
-		return this.radius
+		return this.parameters.radius
 	}
 }
 
@@ -105,26 +118,29 @@ export class PolygonOnBoxGenerator extends ShapeGenerator {
 	
 	static indexToName = ['topLeft', 'topCenter', 'topRight', 'rightCenter', 'bottomRight', 'bottomCenter', 'bottomLeft', 'leftCenter', 'center']
 
-	vertexIndices: number[]
-	vertexNames: string[]
-	closed: boolean
-
-	constructor(parameters: { colors?: any, vertexIndices?: number[], vertexNames?: string[], closed?: boolean }) {
-		super(parameters)
-		this.vertexIndices = parameters.vertexIndices ? parameters.vertexIndices : [4, 6, 1]
-		this.vertexNames = parameters.vertexNames
-		this.closed = parameters.closed ? parameters.closed : true
+	static defaultParameters = { 
+		vertexIndices: [4, 6, 8],
+		closed: true
 	}
 
-	createGUI(gui: dat.GUI) {
-		super.createGUI(gui)
+	parameters: {
+		vertexIndices: number[]
+		vertexNames: string[]
+		closed: boolean
+	}
+
+	constructor(parameters: { colors?: any, vertexIndices?: number[], vertexNames?: string[], closed?: boolean }, parent?: Symbol) {
+		super(parameters, parent)
+	}
+
+	addGUIParameters(gui: dat.GUI) {
 		let object = {
-			indices: JSON.stringify(this.vertexIndices)
+			indices: JSON.stringify(this.parameters.vertexIndices)
 		}
 		gui.add(object, 'indices').name('Vertex indices').onFinishChange( (value: string)=> {
 			try {
 				let newVertices = JSON.parse(value)
-				if(newVertices instanceof Array) {
+				if(Array.isArray(newVertices)) {
 					let allIndices = true
 					for(let i = 0 ; i < newVertices.length ; i++) {
 						if(isFinite(newVertices[i]) && newVertices[i] >= 0 && newVertices[i] < 9) {
@@ -135,7 +151,7 @@ export class PolygonOnBoxGenerator extends ShapeGenerator {
 						}
 					}
 					if(allIndices) {
-						this.vertexIndices = newVertices
+						this.parameters.vertexIndices = newVertices
 					}
 				}
 			} catch (error) {
@@ -147,25 +163,25 @@ export class PolygonOnBoxGenerator extends ShapeGenerator {
 	next(bounds: Bounds, container: Bounds, positions: number[] = []): paper.Path {
 		let polygon = new paper.Path()
 		let rectangle: any = bounds.rectangle
-		if(this.vertexNames == null && this.vertexIndices == null){
+		if(this.parameters.vertexNames == null && this.parameters.vertexIndices == null){
 			polygon.add(rectangle.topCenter)
 			polygon.add(rectangle.bottomLeft)
 			polygon.add(rectangle.bottomRight)
 		}
-		else if(this.vertexIndices != null) {
-			for(let i of this.vertexIndices) {
+		else if(this.parameters.vertexIndices != null) {
+			for(let i of this.parameters.vertexIndices) {
 				polygon.add(rectangle[PolygonOnBoxGenerator.indexToName[i]])
 			}
 		}
-		else if(this.vertexNames != null) {
-			for(let name of this.vertexNames) {
+		else if(this.parameters.vertexNames != null) {
+			for(let name of this.parameters.vertexNames) {
 				polygon.add(rectangle[name])
 			}
 		}
 
-		polygon.closed = this.closed != null ? this.closed : true
+		polygon.closed = this.parameters.closed
 
-		this.colorGenerator.setColor(positions, polygon, container)
+		this.getColorGenerator().setColor(positions, polygon, container)
 		return polygon
 	}
 
@@ -181,24 +197,54 @@ type ShapeProbability = {
 
 export class RandomShapeGenerator extends Symbol {
 
+	static defaultParameters = { 
+		shapeProbabilities: [{
+				weight: 1,
+				type: 'rectangle',
+				parameters: {}
+			}, {
+				weight: 1,
+				type: 'circle',
+				parameters: {}
+			}]
+	}
+
 	symbols: Symbol[]
-	shapeProbabilities: ShapeProbability[]
+	
+	parameters: {
+		shapeProbabilities: ShapeProbability[]
+	}
+
 	folders: dat.GUI[]
 	totalWeight: number
+	currentSymbol: Symbol
 
-	constructor(parameters: { colors: { type: string, parameters: any }, shapeProbabilities: ShapeProbability[] }) {
-		super(parameters)
+	constructor(parameters: { colors: { type: string, parameters: any }, shapeProbabilities: ShapeProbability[] }, parent?: Symbol) {
+		super(parameters, parent)
 
 		this.symbols = []
 		this.folders = []
-		this.shapeProbabilities = parameters.shapeProbabilities
+		this.currentSymbol = null
 		
 		this.totalWeight = 0
-		for(let shapeProbability of parameters.shapeProbabilities) {
-			this.addProbability(shapeProbability, parameters)
+		for(let shapeProbability of this.parameters.shapeProbabilities) {
+			this.addProbability(shapeProbability)
 		}
-
 		
+	}
+
+	getJSON() {
+		let json = super.getJSON()
+		let shapeProbabilities = []
+		let i = 0
+		for(let symbol of this.symbols) {
+			let shapeProbability: any = symbol.getJSON()
+			shapeProbability.weight = this.parameters.shapeProbabilities[i].weight
+			shapeProbabilities.push(shapeProbability)
+			i++
+		}
+		json.parameters.shapeProbabilities = shapeProbabilities
+		return json
 	}
 
 	addSymbol() {
@@ -208,17 +254,16 @@ export class RandomShapeGenerator extends Symbol {
 			parameters: {}
 		}
 
-		let index = this.shapeProbabilities.length
-		this.shapeProbabilities.push(shapeProbability)
-		this.addProbability(shapeProbability, {})
+		let index = this.parameters.shapeProbabilities.length
+		this.parameters.shapeProbabilities.push(shapeProbability)
+		this.addProbability(shapeProbability)
 		this.addProbabilityGUI(shapeProbability, this.gui, index)
 	}
 
-	createGUI(gui: dat.GUI) {
-		super.createGUI(gui)
+	addGUIParameters(gui: dat.GUI) {
 		gui.add(this, 'addSymbol').name('Add symbol')
 		let i=0
-		for(let shapeProbability of this.shapeProbabilities) {
+		for(let shapeProbability of this.parameters.shapeProbabilities) {
 			this.addProbabilityGUI(shapeProbability, gui, i)
 			i++
 		}
@@ -227,8 +272,8 @@ export class RandomShapeGenerator extends Symbol {
 	createDeleteSymbol(shapeProbability: ShapeProbability, folder: dat.GUI) {
 		return ()=> {
 			this.totalWeight -= shapeProbability.weight
-			let index = this.shapeProbabilities.indexOf(shapeProbability)
-			this.shapeProbabilities.splice(index, 1)
+			let index = this.parameters.shapeProbabilities.indexOf(shapeProbability)
+			this.parameters.shapeProbabilities.splice(index, 1)
 			let gui: any = this.gui
 			gui.removeFolder(folder)
 		}
@@ -236,7 +281,7 @@ export class RandomShapeGenerator extends Symbol {
 
 	computeWeight() {
 		this.totalWeight = 0
-		for(let shapeProbability of this.shapeProbabilities) {
+		for(let shapeProbability of this.parameters.shapeProbabilities) {
 			this.totalWeight += shapeProbability.weight
 		}
 	}
@@ -244,59 +289,77 @@ export class RandomShapeGenerator extends Symbol {
 	changeChildSymbol(symbol: Symbol, type: string) {
 
 		let index = this.symbols.indexOf(symbol)
-		let shapeProbability = this.shapeProbabilities[index]
+		let shapeProbability = this.parameters.shapeProbabilities[index]
+		shapeProbability.type = type
 
-		let gui: any = this.gui
-		gui.removeFolder(this.folders[index])
-		this.folders[index] = this.gui.addFolder('Symbol' + index)
 		let folder = this.folders[index]
-		folder.add(shapeProbability, 'weight', 0, 100).step(1).name('Weight').onFinishChange( ()=> this.computeWeight() )
 
-		folder.add({ deleteSymbol: this.createDeleteSymbol(shapeProbability, folder) }, 'deleteSymbol').name('Delete symbol')
+		emptyFolder(folder)
 
-		this.symbols[index] = Symbol.CreateSymbol(type, {}, this)
-		this.symbols[index].createGUI(folder)
+		shapeProbability.parameters  = {}
+		this.symbols[index] = Symbol.createSymbol(type, {}, this)
+		
+		this.addProbabilityGUI(shapeProbability, this.gui, index, folder)
 	}
 
-	addProbability(shapeProbability: ShapeProbability, parameters: any) {
-		let symbol = Symbol.CreateSymbol(shapeProbability.type, Symbol.passParametersColors(shapeProbability, parameters.colors), this)
+	addProbability(shapeProbability: ShapeProbability) {
+		let symbol = Symbol.createSymbol(shapeProbability.type, shapeProbability.parameters, this)
 		this.symbols.push(symbol)
 		this.totalWeight += shapeProbability.weight
 	}
 
-	addProbabilityGUI(shapeProbability: ShapeProbability, gui: dat.GUI, i: number) {
-		let folder = gui.addFolder('Symbol' + i)
-		this.folders.push(folder)
+	addProbabilityGUI(shapeProbability: ShapeProbability, gui: dat.GUI, i: number, folder: dat.GUI = null) {
+		
+		if(folder == null) {
+			folder = gui.addFolder('Symbol' + i)
+			folder.open()
+			this.folders.push(folder)
+		}
+
 		folder.add(shapeProbability, 'weight', 0, 100).step(1).name('Weight').onFinishChange( ()=> this.computeWeight() )
 
 		this.symbols[i].createGUI(folder)
 		
 		folder.add({ deleteSymbol: this.createDeleteSymbol(shapeProbability, folder) }, 'deleteSymbol').name('Delete symbol')
+		return folder
+	}
+
+	nextCurrentSymbol(bounds: Bounds, container: Bounds, positions: number[] = []): paper.Path {
+		let result = this.currentSymbol.next(bounds, container, positions)
+
+		if(this.currentSymbol.hasFinished()) {
+			this.currentSymbol.reset(bounds)
+			this.currentSymbol = null
+		}
+
+		return result
 	}
 
 	next(bounds: Bounds, container: Bounds, positions: number[] = []): paper.Path {
+		if(this.currentSymbol != null) {
+			return this.nextCurrentSymbol(bounds, container, positions)
+		}
+
 		let random = Math.random() * this.totalWeight
 		let sum = 0
 
 		let i = 0
-		for(let shapeProbability of this.shapeProbabilities) {
+		for(let shapeProbability of this.parameters.shapeProbabilities) {
 			sum += shapeProbability.weight
 			if(sum > random) {
-				let symbol = this.symbols[i]
-				let result = symbol.next(bounds, container, positions)
-
-				if(symbol.hasFinished()) {
-					symbol.reset(bounds)
-				}
-
-				return result
+				this.currentSymbol = this.symbols[i]
+				this.currentSymbol.reset(bounds)
+				return this.nextCurrentSymbol(bounds, container, positions)
 			}
 			i++
 		}
 
 		return null
 	}
-
+	
+	hasFinished(): boolean {
+		return this.currentSymbol == null
+	}
 }
 
 Symbol.addSymbol(RandomShapeGenerator, 'random-shape')

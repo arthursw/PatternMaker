@@ -1,0 +1,72 @@
+{
+  "generation": "animation",
+  "speed": 500,
+  "nSymbolsPerFrame": 100,
+  "size": {
+    "width": 1000,
+    "height": 1000
+  },
+  "optimizeWithRaster": false,
+  "symbol": {
+    "type": "placer-xyz",
+    "parameters": {
+      "height": 6,
+      "width": 6,
+      "nSymbolsToCreate": 1,
+      "margin": true,
+      "scale": 0.2,
+      "symbol": {
+        "type": "random-shape",
+        "parameters": {
+          "shapeProbabilities": [
+            {
+              "type": "placer-xyz",
+              "parameters": {
+                "height": 7,
+                "width": 5,
+                "nSymbolsToCreate": 1,
+                "margin": false,
+                "scale": 0.5,
+                "symbol": {
+                  "type": "circle",
+                  "parameters": {
+                    "radius": 1
+                  }
+                }
+              },
+              "weight": 1
+            },
+            {
+              "type": "placer-z",
+              "parameters": {
+                "nSymbolsToCreate": 3,
+                "symbol": {
+                  "type": "rectangle",
+                  "parameters": {
+                    "width": 1,
+                    "height": 1
+                  }
+                },
+                "scale": 0.21,
+                "margin": false
+              },
+              "weight": 1
+            }
+          ],
+          "colors": {
+            "type": "random-palette",
+            "parameters": {
+              "palette": [
+                "rgb(0,35,100)",
+                "rgb(62,62,198)",
+                "rgb(72,205,72)",
+                "rgb(0,0,0)",
+                "rgb(0,255,218)"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

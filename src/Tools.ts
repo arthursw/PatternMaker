@@ -4,7 +4,7 @@ import 'brace/mode/json'
 import 'brace/theme/solarized_light'
 
 let files: Map<string, string> = new Map<string, string>()
-let editor: any = null
+export let editor: any = null
 let w: any = window
 w.$ = <any>$;
 
@@ -74,6 +74,7 @@ let loadDefaultFiles = ()=> {
 export let initializeEditor = (parameters: any): any => {
 	
 	editor = ace.edit('json-editor');
+	w.editor = editor
 	editor.getSession().setMode('ace/mode/json');
 	editor.setTheme('ace/theme/solarized_light');
 	editor.session.setUseWrapMode(true);
@@ -81,7 +82,10 @@ export let initializeEditor = (parameters: any): any => {
 	editor.setValue(JSON.stringify(parameters, null, 2));
 	editor.clearSelection();
 	editor.session.on('change', function(delta: { start: any, end: any, lines: any, action: any}) {
-		
+		if(editor.ignoreChange) {
+			editor.ignoreChange = false
+			return
+		}
 		let parameters = null
 		try {
 			parameters = JSON.parse(editor.getValue())
@@ -144,6 +148,9 @@ export let initializeEditor = (parameters: any): any => {
 	$('#tools .tabs .JSON').on('click', (event: any)=> {
 		$('#gui-container').hide()
 		$('#json-editor').show()
+
+		let e = new CustomEvent('jsonClicked')
+		document.dispatchEvent(e)
 	})
 
 	$('#tools .tabs .GUI').on('click', (event: any)=> {

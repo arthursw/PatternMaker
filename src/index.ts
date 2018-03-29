@@ -1,6 +1,6 @@
 import * as paper from 'paper'
 
-import { initializeEditor } from './Tools'
+import { initializeEditor, editor } from './Tools'
 import { Bounds } from './Bounds';
 import { Symbol, SymbolConstructor } from './Symbol';
 import './Placer';
@@ -61,17 +61,27 @@ let parameters = {
 	}
 }
 
-let symbol: Symbol = null
-let container: Bounds = null
 let raster: paper.Raster = null
 let timeoutID: number = null
 let gui: dat.GUI = null
+let symbol: Symbol = null
+let container: Bounds = null
 
-let createSymbol = (doCreateGUI = true)=> {
-	symbol = Symbol.CreateSymbol(parameters.symbol.type, parameters.symbol.parameters, null)
-	symbol.createGUI(gui)
+let createRootSymbol = (type: string = null, symbolParameters: any = null)=> {
+	let rootGUI: any = gui
+	if(rootGUI.__folders['Symbol']) {
+		rootGUI.removeFolder(rootGUI.__folders['Symbol'])
+	}
+
+	let folder = gui.addFolder('Symbol')
+	folder.open()
+	symbol = Symbol.createSymbol(type != null ? type : parameters.symbol.type, symbolParameters != null ? symbolParameters : parameters.symbol.parameters, null)
+	symbol.createGUI(folder)
+
+	w.symbol = symbol
 
 	reset()
+	return container
 }
 
 let reset = ()=> {
@@ -104,16 +114,16 @@ let onFrame = ()=> {
 		paper.project.activeLayer.addChild(raster)
 	}
 
-	for(let i = 0 ; i < parameters.nSymbolsPerFrame ; i++) {
-		symbol.next(container, container)
-		if(symbol.hasFinished() && parameters.generation == 'animation') {
-			if(timeoutID == null) {
+	if(timeoutID == null) {
+		for(let i = 0 ; i < parameters.nSymbolsPerFrame ; i++) {
+			symbol.next(container, container)
+			if(symbol.hasFinished() && parameters.generation == 'animation') {
 				timeoutID = setTimeout(()=> {
 					reset()
 					timeoutID = null
 				}, parameters.speed)
+				break
 			}
-			break
 		}
 	}
 
@@ -124,12 +134,19 @@ let onFrame = ()=> {
 
 document.addEventListener('changeParameters', (event: any) => {
 	if(event.detail != null && event.detail.parameters != null) {
-		parameters = event.detail.parameters
+		for(let name in event.detail.parameters) {
+			(<any>parameters)[name] = event.detail.parameters[name]
+		}
 	}
-	let doCreateGUI = event.detail != null && event.detail.createGUI != null ? event.detail.createGUI : null
 	clearTimeout(timeoutID)
 	timeoutID = null
-	createSymbol(doCreateGUI)
+	createRootSymbol(parameters.symbol.type, parameters.symbol.parameters)
+})
+
+document.addEventListener('jsonClicked', (event: any) => {
+	parameters.symbol = symbol.getJSON()
+	editor.ignoreChange = true
+	editor.setValue(JSON.stringify(parameters, null, 2));
 })
 
 document.addEventListener("DOMContentLoaded", function(event) { 
@@ -143,8 +160,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	initializeEditor(parameters)
 
 	gui = createGUI(parameters)
+	createRootSymbol()
 
-	createSymbol()
 	paper.view.onFrame = onFrame
 	paper.view.onClick = reset
 	paper.view.onResize = reset

@@ -11,17 +11,17 @@
     "type": "placer",
     "parameters": {
       "type": "y",
-      "count": 1,
+      "nSymbolsToCreate": 1,
       "symbol": {
         "type": "placer",
         "parameters": {
           "type": "x",
-          "count": 1,
+          "nSymbolsToCreate": 1,
           "symbol": {
             "type": "placer",
             "parameters": {
               "type": "static",
-              "count": 5,
+              "nSymbolsToCreate": 5,
               "symbol": {
                 "type": "random-shape",
                 "parameters": {

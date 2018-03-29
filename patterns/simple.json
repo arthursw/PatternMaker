@@ -12,7 +12,7 @@
     "parameters": {
       "width": 10,
       "height": 10,
-      "count": 1,
+      "nSymbolsToCreate": 1,
       "scale": 0.2,
       "margin": true,
       "symbol": {

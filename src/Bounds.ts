@@ -7,6 +7,10 @@ export class Bounds {
 	rotation: number
 
 	constructor(bounds: paper.Path | paper.Rectangle, rotation: number = 0) {
+		this.set(bounds, rotation)
+	}
+
+	set(bounds: paper.Path | paper.Rectangle, rotation: number = 0) {
 		this.rectangle = bounds instanceof paper.Path ? bounds.bounds.clone() : bounds.clone()
 		this.path = bounds instanceof paper.Path ? bounds : null
 		this.rotation = rotation
