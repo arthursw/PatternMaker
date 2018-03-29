@@ -3,8 +3,9 @@ import * as paper from 'paper'
 import { initializeEditor } from './Tools'
 import { Bounds } from './Bounds';
 import { Symbol, SymbolConstructor } from './Symbol';
-import { Placer } from './Placer'
-import { createGUI } from './GUI'
+import './Placer';
+import './ShapeGenerator';
+import { createGUI } from './GUI';
 
 let w:any = <any>window;
 (<any>window).w = w;
@@ -12,7 +13,7 @@ let w:any = <any>window;
 let parameters = {
 	generation: 'animation',
 	speed: 500,
-	numberOfSymbolPerFrame: 100,
+	nSymbolsPerFrame: 100,
 	size: {
 		width: 1000,
 		height: 1000
@@ -64,13 +65,11 @@ let symbol: Symbol = null
 let container: Bounds = null
 let raster: paper.Raster = null
 let timeoutID: number = null
+let gui: dat.GUI = null
 
 let createSymbol = (doCreateGUI = true)=> {
-	symbol = Placer.createFromJSON(parameters.symbol)
-	
-	if(doCreateGUI) {
-		createGUI(parameters)
-	}
+	symbol = Symbol.CreateSymbol(parameters.symbol.type, parameters.symbol.parameters, null)
+	symbol.createGUI(gui)
 
 	reset()
 }
@@ -105,9 +104,9 @@ let onFrame = ()=> {
 		paper.project.activeLayer.addChild(raster)
 	}
 
-	for(let i = 0 ; i < parameters.numberOfSymbolPerFrame ; i++) {
+	for(let i = 0 ; i < parameters.nSymbolsPerFrame ; i++) {
 		symbol.next(container, container)
-		if(symbol.hasFinished()) {
+		if(symbol.hasFinished() && parameters.generation == 'animation') {
 			if(timeoutID == null) {
 				timeoutID = setTimeout(()=> {
 					reset()
@@ -142,6 +141,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	w.paper = paper
 
 	initializeEditor(parameters)
+
+	gui = createGUI(parameters)
 
 	createSymbol()
 	paper.view.onFrame = onFrame

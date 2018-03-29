@@ -2,9 +2,9 @@ import * as paper from 'paper';
 import * as dat from 'dat.gui'
 import { sizeToPoint } from './Utils';
 import { Bounds } from './Bounds';
-import { Symbol, SymbolConstructor } from './Symbol';
+import { Symbol } from './Symbol';
 import { ColorGenerator, RandomColorFromPalette } from './ColorGenerator';
-import { ShapeGenerator, RectangleGenerator, symbolGenerators } from './ShapeGenerator';
+import { ShapeGenerator, RectangleGenerator } from './ShapeGenerator';
 
 export class Placer extends Symbol {
 
@@ -14,17 +14,12 @@ export class Placer extends Symbol {
 	bounds: Bounds
 	symbol: Symbol
 
-	static createFromJSON(parameters: { type: string, parameters: any }): Symbol {
-		let SymbolGenerator = symbolGenerators.get(parameters.type)
-		return new SymbolGenerator(parameters.parameters)
-	}
+	folder: dat.GUI
 
 	constructor(parameters: { count: number, symbol: any, colors?: any }) {
 		super(parameters)
 
-		let SymbolGenerator = symbolGenerators.get(parameters.symbol.type)
-		
-		let symbol = new SymbolGenerator(Symbol.passParameters(parameters))
+		let symbol = Symbol.CreateSymbol(parameters.symbol.type, Symbol.passParameters(parameters), this)
 
 		this.nCreatedSymbols = 0
 		this.nSymbolsToCreate = parameters.count
@@ -34,6 +29,26 @@ export class Placer extends Symbol {
 		this.bounds = null
 	}
 
+	createGUI(gui: dat.GUI) {
+		this.gui = gui
+		this.addTypeOnGUI(gui)
+		this.addGUIParameters(gui)
+		this.folder = gui.addFolder('Symbol')
+		this.symbol.createGUI(this.folder)
+	}
+
+	addGUIParameters(gui: dat.GUI) {
+		gui.add(this, 'nSymbolsToCreate', 1, 100).step(1).name('Num. Symbols')
+	}
+	
+	changeChildSymbol(symbol: Symbol, type: string) {
+		let gui: any = this.gui
+		gui.removeFolder(this.folder)
+		this.folder = this.gui.addFolder('Symbol')
+
+		this.symbol = Symbol.CreateSymbol(type, {}, this)
+		this.symbol.createGUI(this.folder)
+	}
 
 	initializeBounds(bounds: Bounds) {
 		this.bounds = new Bounds(bounds.rectangle)
@@ -74,12 +89,16 @@ export class Placer extends Symbol {
 	}
 }
 
-symbolGenerators.set('placer', Placer)
+Symbol.addSymbol(Placer, 'placer')
 
 export class PlacerX extends Placer {
 
 	constructor(parameters: { count: number, symbol: any, colors?: any }) {
 		super(parameters)
+	}
+	
+	addGUIParameters(gui: dat.GUI) {
+		gui.add(this, 'nSymbolsToCreate', 1, 100).step(1).name('Width')
 	}
 
 	initializeBounds(bounds: Bounds) {
@@ -93,12 +112,16 @@ export class PlacerX extends Placer {
 	}
 }
 
-symbolGenerators.set('placer-x', PlacerX)
+Symbol.addSymbol(PlacerX, 'placer-x')
 
 export class PlacerY extends Placer {
 
 	constructor(parameters: { count: number, symbol: any, colors?: any }) {
 		super(parameters)
+	}
+	
+	addGUIParameters(gui: dat.GUI) {
+		gui.add(this, 'nSymbolsToCreate', 1, 100).step(1).name('Height')
 	}
 
 	initializeBounds(bounds: Bounds) {
@@ -112,7 +135,7 @@ export class PlacerY extends Placer {
 	}
 }
 
-symbolGenerators.set('placer-y', PlacerY)
+Symbol.addSymbol(PlacerY, 'placer-y')
 
 export class PlacerZ extends Placer {
 
@@ -123,6 +146,12 @@ export class PlacerZ extends Placer {
 		super(parameters)
 		this.scale = parameters.scale ? parameters.scale : 0.5
 		this.margin = parameters.margin ? parameters.margin : false
+	}
+
+	addGUIParameters(gui: dat.GUI) {
+		gui.add(this, 'nSymbolsToCreate', 1, 100).step(1).name('Depth')
+		gui.add(this, 'margin').name('Margin')
+		gui.add(this, 'scale', 0, 1).step(0.01).name('Scale')
 	}
 
 	initializeBounds(bounds: Bounds) {
@@ -149,7 +178,7 @@ export class PlacerZ extends Placer {
 	}
 }
 
-symbolGenerators.set('placer-z', PlacerZ)
+Symbol.addSymbol(PlacerZ, 'placer-z')
 
 export class PlacerXYZ extends PlacerY {
 
@@ -177,9 +206,30 @@ export class PlacerXYZ extends PlacerY {
 		}
 		super(newParameters)
 	}
+
+	getSymbol() {
+		return (<any>this.symbol).symbol
+	}
+
+	createGUI(gui: dat.GUI) {
+		this.gui = gui
+		this.addTypeOnGUI(gui)
+		this.addGUIParameters(gui)
+		this.folder = gui.addFolder('Symbol')
+		this.getSymbol().symbol.createGUI(this.folder)
+	}
+
+	addGUIParameters(gui: dat.GUI) {
+		let childSymbol = this.getSymbol()
+		gui.add(this.symbol, 'nSymbolsToCreate', 1, 100).step(1).name('Width')
+		gui.add(this, 'nSymbolsToCreate', 1, 100).step(1).name('Height')
+		gui.add(childSymbol, 'nSymbolsToCreate', 1, 100).step(1).name('Depth')
+		gui.add(childSymbol, 'margin').name('Margin')
+		gui.add(childSymbol, 'scale', 0, 1).step(0.01).name('Scale')
+	}
 }
 
-symbolGenerators.set('placer-xyz', PlacerXYZ)
+Symbol.addSymbol(PlacerXYZ, 'placer-xyz')
 
 export class PlacerMinMax extends Placer {
 	
@@ -205,3 +255,5 @@ export class PlacerMinMax extends Placer {
 		this.initializeNSymbolsToCreate()
 	}
 }
+
+Symbol.addSymbol(PlacerMinMax, 'placer-min-max')
