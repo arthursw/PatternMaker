@@ -4,14 +4,17 @@ import * as datDefault from 'dat.gui'
 let dat: any = (<any>datDefault).default
 let gui: dat.GUI = null
 
+let w:any = <any>window;
+
 export let createGUI = (parameters: { generation: string, speed: number, nSymbolsPerFrame: number, size: { width: number, height: number}, optimizeWithRaster: boolean })=> {
 	dat.GUI.DEFAULT_WIDTH = '100%'
 	gui = new dat.GUI({ autoPlace: false })
+	w.gui = gui
 	
 	$('#gui-container').hide()
 	$('#gui').append(gui.domElement)
 
-	gui.add(parameters, 'generation').options(['animation', 'images']).name('Generation')
+	gui.add(parameters, 'generation').options(['animation', 'image']).name('Generation')
 	gui.add(parameters, 'speed', 0, 1000).step(10).name('Speed')
 	gui.add(parameters, 'nSymbolsPerFrame', 1, 1000).step(1).name('Num. symbols / frame')
 	gui.add(parameters.size, 'width').name('Width')

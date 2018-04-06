@@ -11,6 +11,7 @@ w.$ = <any>$;
 let setFile = (fileName: string, content: string, setContentInEditor = true)=> {
 	if(setContentInEditor) {
 		editor.setValue(content)
+		editor.clearSelection()
 	}
 
 	if( files.get(fileName) == null) {

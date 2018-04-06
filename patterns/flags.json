@@ -23,7 +23,7 @@
               "type": "static",
               "nSymbolsToCreate": 5,
               "symbol": {
-                "type": "random-shape",
+                "type": "random-symbol",
                 "parameters": {
                   "shapeProbabilities": [
                     {
@@ -162,7 +162,7 @@
                       }
                     }
                   ],
-                  "colors": {
+                  "effects": {
                     "type": "random-palette",
                     "parameters": {
                       "palette": [

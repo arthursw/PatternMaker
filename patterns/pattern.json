@@ -8,7 +8,7 @@
   },
   "optimizeWithRaster": false,
   "symbol": {
-    "type": "placer-xyz",
+    "type": "grid",
     "parameters": {
       "height": 6,
       "width": 6,
@@ -16,11 +16,11 @@
       "margin": true,
       "scale": 0.2,
       "symbol": {
-        "type": "random-shape",
+        "type": "random-symbol",
         "parameters": {
           "shapeProbabilities": [
             {
-              "type": "placer-xyz",
+              "type": "grid",
               "parameters": {
                 "height": 7,
                 "width": 5,
@@ -53,7 +53,7 @@
               "weight": 1
             }
           ],
-          "colors": {
+          "effects": {
             "type": "random-palette",
             "parameters": {
               "palette": [

@@ -74,6 +74,10 @@ export class Bounds {
 	}
 
 	clone() {
-		return new Bounds(this.getPath())
+		return this.path == null ? new Bounds(this.rectangle, this.rotation) : new Bounds(this.path, this.rotation)
+	}
+
+	getRectangleString() {
+		return this.rectangle.toString()
 	}
 }

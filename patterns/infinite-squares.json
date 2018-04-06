@@ -8,7 +8,7 @@
   },
   "optimizeWithRaster": false,
   "symbol": {
-    "type": "placer-z",
+    "type": "scaler",
     "parameters": {
       "nSymbolsToCreate": 50,
       "scale": 0.1,

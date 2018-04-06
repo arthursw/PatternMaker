@@ -4,13 +4,13 @@ import { initializeEditor, editor } from './Tools'
 import { Bounds } from './Bounds';
 import { Symbol, SymbolConstructor } from './Symbol';
 import './Placer';
-import './ShapeGenerator';
+import './Shape';
 import { createGUI } from './GUI';
 
 let w:any = <any>window;
 (<any>window).w = w;
 
-let parameters = {
+let parametersOld = {
 	generation: 'animation',
 	speed: 500,
 	nSymbolsPerFrame: 100,
@@ -20,7 +20,7 @@ let parameters = {
 	},
 	optimizeWithRaster: false,
 	symbol: {
-		type: 'placer-xyz',
+		type: 'grid',
 		parameters: {
 			width: 10,
 			height: 10,
@@ -28,7 +28,7 @@ let parameters = {
 			scale: 0.2,
 			margin: true,
 			symbol: {
-				type: 'random-shape',
+				type: 'random-symbol',
 				parameters: {		
 					shapeProbabilities: [{
 						weight: 1,
@@ -44,7 +44,7 @@ let parameters = {
 							height: 1
 						}
 					}],
-					colors: {
+					effects:[ {
 						type: 'random-palette',
 						parameters: {
 							palette: [
@@ -54,11 +54,63 @@ let parameters = {
 							'black'
 							]
 						}
-					}
+					} ]
 				}
 			}
 		}
 	}
+}
+
+let parameters = {
+  generation: 'animation',
+  speed: 500,
+  nSymbolsPerFrame: 100,
+  size: {
+    width: 1000,
+    height: 1000
+  },
+  optimizeWithRaster: false,
+  symbol: {
+    type: 'grid',
+    parameters: {
+      height: 50,
+      width: 50,
+      nSymbolsToCreate: 1,
+      margin: true,
+      scale: 0.13,
+      symbol: {
+        type: 'random-symbol',
+        parameters: {
+          shapeProbabilities: [
+            {
+              type: 'circle',
+              parameters: {
+                radius: 0.75
+              },
+              weight: 1
+            },
+            {
+              type: 'rectangle',
+              parameters: {
+                width: 1,
+                height: 1
+              },
+              weight: 1
+            }
+          ],
+          effects: [{
+            type: 'random-palette',
+            parameters: {
+              palette: [
+                'rgb(107,30,20)',
+                'rgb(178,59,23)'
+              ]
+            }
+          }]
+        }
+      }
+    }
+  }
 }
 
 let raster: paper.Raster = null
@@ -105,6 +157,10 @@ let reset = ()=> {
 	paper.view.center = rectangle.center
 
 	symbol.reset(container)
+
+	if(raster != null) {
+		raster = paper.project.activeLayer.rasterize()
+	}
 }
 
 let onFrame = ()=> {
@@ -147,6 +203,7 @@ document.addEventListener('jsonClicked', (event: any) => {
 	parameters.symbol = symbol.getJSON()
 	editor.ignoreChange = true
 	editor.setValue(JSON.stringify(parameters, null, 2));
+	editor.clearSelection()
 })
 
 document.addEventListener("DOMContentLoaded", function(event) { 

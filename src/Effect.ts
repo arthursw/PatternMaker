@@ -1,0 +1,261 @@
+import * as paper from 'paper';
+import { Bounds } from './Bounds';
+import { Symbol } from './Symbol';
+
+interface EffectConstructor {
+	type: string
+	new (...args: any[]): Effect;
+}
+
+export class Effect {
+	
+	static type: string
+	static effects = new Map<string, EffectConstructor>()
+	static effectNames: string[] = []
+
+	effectsFolder: dat.GUI
+	folder: dat.GUI
+	gui: dat.GUI
+	symbol: Symbol
+
+	static defaultParameters = {}
+
+	parameters: any
+
+	static addEffect(effect: EffectConstructor, name: string) {
+		Effect.effects.set(name, effect)
+		Effect.effectNames.push(name)
+		effect.type = name
+	}
+
+	static createEffect(type: string, parameters: any, symbol: Symbol, effectIndex: number = null) {
+		let EffectGenerator = Effect.effects.get(type)
+		return new EffectGenerator(parameters, symbol, effectIndex)
+	}
+
+	static createDefaultEffect(symbol: Symbol) {
+		let EffectGenerator = Effect.effects.get('random-hue')
+		let effect = new EffectGenerator({}, symbol)
+		symbol.recreateEffectGUI()
+		return effect
+	}
+
+	constructor(parameters: any = {}, symbol: Symbol, effectIndex: number = null) {
+		this.symbol = symbol
+		this.symbol.effects.splice(effectIndex != null ? effectIndex : this.symbol.effects.length, 0, this)
+
+		let defaultParameters = (<typeof Effect>this.constructor).defaultParameters
+		
+		this.initializeParameters(parameters)
+	}
+
+	initializeParameters(parameters: any) {
+		this.parameters = parameters
+		let defaultParameters: any = (<typeof Symbol>this.constructor).defaultParameters
+		this.copyDefaultParameters(defaultParameters, this.parameters)
+	}
+
+	copyDefaultParameters(defaultParameters: any, parameters: any) {
+		if(defaultParameters == null || typeof defaultParameters != 'object' || Array.isArray(defaultParameters)) {
+			return
+		}
+		for(let name in defaultParameters) {
+			if(parameters[name] == null) {
+				parameters[name] = defaultParameters[name]
+			} else {
+				this.copyDefaultParameters(defaultParameters[name], parameters[name])
+			}
+		}
+	}
+
+	getJSON() {
+		return { 
+			type: (<typeof Symbol>this.constructor).type,
+			parameters: this.parameters,
+		}
+	}
+
+	applyEffect(positions: number[], item: paper.Path, container: Bounds): void {
+		this.setColor(positions, item, container)
+	}
+
+	setColor(positions: number[], item: paper.Path, container: Bounds): void {
+	}
+
+	createGUI(effectsFolder: dat.GUI, n: number) {
+		this.effectsFolder = effectsFolder
+
+		this.gui = effectsFolder.addFolder('Effect ' + n)
+		this.gui.open()
+
+		this.addTypeOnGUI(this.gui, (<typeof Effect>this.constructor).type)
+
+		this.addGUIParameters(this.gui)
+
+		this.addRemoveEffectButton(this.gui)
+
+		this.effectsFolder.open()
+	}
+
+	addRemoveEffectButton(gui: dat.GUI) {
+		gui.add(this, 'removeEffect').name('Remove effect')
+	}
+
+	removeEffect() {
+		this.symbol.removeEffect(this)
+	}
+
+	addTypeOnGUI(gui: dat.GUI, type: string) {
+		gui.add( { type: type }, 'type').options(Effect.effectNames).name('Type').onChange( (value: string)=> {
+			this.changeEffect(value)
+		} )
+	}
+
+	removeGUI() {
+		let gui: any = this.effectsFolder
+		gui.removeFolder(this.gui)
+	}
+
+	changeEffect(type: string) {	
+		this.symbol.changeEffect(this, type)
+	}
+	
+	addGUIParameters(gui: dat.GUI) {
+	}
+}
+
+export class RandomHue extends Effect {
+
+	static defaultParameters = {
+		hue: 180,
+		hueRange: 360,
+		saturation: 1,
+		brightness: 1,
+		alpha: 1
+	}
+
+	parameters: {
+		hue: number
+		hueRange: number
+		saturation: number
+		brightness: number
+		alpha: number
+	}
+
+	setColor(positions: number[], item: paper.Path, container: Bounds): void {
+		item.fillColor = new paper.Color({
+			hue: this.parameters.hue + ( Math.random() - 0.5 ) * this.parameters.hueRange,
+			saturation: this.parameters.saturation,
+			brightness: this.parameters.brightness
+		})
+		item.fillColor.alpha = this.parameters.alpha
+	}
+
+	addGUIParameters(gui: dat.GUI) {
+		gui.add(this.parameters, 'hue', 0, 360).step(1).name('Hue')
+		gui.add(this.parameters, 'hueRange', 0, 360).step(1).name('Hue range')
+		gui.add(this.parameters, 'saturation', 0, 1).step(0.01).name('Saturation')
+		gui.add(this.parameters, 'brightness', 0, 1).step(0.01).name('Brightness')
+		gui.add(this.parameters, 'alpha', 0, 1).step(0.01).name('Alpha')
+	}
+}
+
+Effect.addEffect(RandomHue, 'random-hue')
+
+export class Noise extends Effect {
+
+	static defaultParameters = {
+		amount: 10
+	}
+
+	parameters: {
+		amount: number
+	}
+
+	applyEffect(positions: number[], item: paper.Path, container: Bounds): void {
+		let i = 0
+		for(let segment of item.segments) {
+			let x = Math.floor(1000 * ( segment.point.x - container.rectangle.x ) / container.rectangle.width)
+			let y = Math.floor(1000 * ( segment.point.y - container.rectangle.y ) / container.rectangle.height)
+
+			let direction = (x * 73856093 ^ y * 19349663) % 10000
+			let vector = new paper.Point(this.parameters.amount, 0)
+			vector.angle = direction
+
+			segment.point = segment.point.add(vector)
+			i++
+		}
+	}
+
+	addGUIParameters(gui: dat.GUI) {
+		gui.add(this.parameters, 'amount').name('Amount')
+	}
+}
+
+Effect.addEffect(Noise, 'noise')
+
+export class ThreeStripesColor extends Effect {
+
+	setColor(positions: number[], item: paper.Path, container: Bounds): void {
+		let hue = positions.length > 0 ? positions[0] * 255 : 0
+		let saturation = positions.length > 1 ? 0.75 + positions[1] * 0.25 : 0
+		let brightness = positions.length > 2 ? 0.75 + positions[2] * 0.25 : 0
+		item.fillColor = new paper.Color({hue: hue, saturation: saturation, brightness: brightness})
+	}
+
+	addGUIParameters(gui: dat.GUI) {
+	}
+}
+
+Effect.addEffect(ThreeStripesColor, 'three-stripes')
+
+export class RandomColorFromPalette extends Effect {
+	
+	folder: dat.GUI
+
+	static defaultParameters = {
+		alpha: 1,
+		palette: ['black']
+	}
+
+	parameters: {
+		alpha: number
+		palette: string[]
+	}
+
+	setColor(positions: number[], item: paper.Path, container: Bounds): void {	
+		item.fillColor = new paper.Color(this.parameters.palette.length == 0 ? 'black' : this.parameters.palette[Math.floor(Math.random() * this.parameters.palette.length)])
+		item.fillColor.alpha = this.parameters.alpha
+	}
+
+	addGUIParameters(gui: dat.GUI) {
+		gui.add(this.parameters, 'alpha', 0, 1).step(0.01).name('Alpha')
+		this.folder = gui.addFolder('Palette')
+		this.folder.open()
+		this.folder.add(this, 'addColor').name('Add color')
+		this.folder.add(this, 'removeLastColor').name('Remove last color')
+		for(let color in this.parameters.palette) {
+			this.parameters.palette[color] = new paper.Color(this.parameters.palette[color]).toCSS(false)
+			this.folder.addColor(this.parameters.palette, color)
+		}
+	}
+
+	addColor() {
+		let color = new paper.Color({
+			hue: Math.random()  * 360,
+			saturation: 1,
+			brightness: 1
+		})
+		this.parameters.palette.push(color.toCSS(false))
+		this.folder.addColor(this.parameters.palette, ''+(this.parameters.palette.length-1))
+	}
+
+	removeLastColor() {
+		if(this.parameters.palette.length > 0) {
+			this.parameters.palette.pop()
+			this.folder.remove(this.folder.__controllers[this.folder.__controllers.length-1])
+		}
+	}
+}
+
+Effect.addEffect(RandomColorFromPalette, 'random-palette')

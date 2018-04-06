@@ -39,10 +39,6 @@ button {
 	width: 300px;
 }
 
-.dg .cr.function .property-name {
-	width: 100%;
-}
-
 #gui-container {
 	
 }
@@ -60,6 +56,10 @@ button {
 	bottom: 20px;
 }
 
+.dg .cr.function .property-name {
+	width: 100%;
+}
+
 #json-editor {
 	position: absolute;
 	top: 0;
@@ -74,10 +74,6 @@ button {
 	width: 50%;
 	top: 0;
 	bottom: 0;
-}
-
-.dg .cr.function .property-name {
-	width: 100%;
 }
 
 #tools { 
@@ -168,4 +164,12 @@ button {
 	border-bottom: 5px solid transparent; 
 
 	border-right: 5px solid black; 
+}
+
+.dg.invisible > ul > li.title {
+	display: none;
+}
+
+.dg.invisible > ul {
+	margin-left: -4px;
 }

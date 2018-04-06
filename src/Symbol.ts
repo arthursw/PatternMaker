@@ -1,6 +1,6 @@
 import * as paper from 'paper';
 import { Bounds } from './Bounds';
-import { ColorGenerator } from './ColorGenerator';
+import { Effect } from './Effect';
 
 export interface SymbolInterface {
 	createGUI(gui: dat.GUI): void
@@ -30,18 +30,24 @@ export class Symbol implements SymbolInterface {
 
 	parent: Symbol
 	gui: dat.GUI
-	colorGenerator: ColorGenerator
+	effectsFolder: dat.GUI
+	addEffectButton: dat.GUIController
+	effects: Effect[]
+	effectCount: number
 	parameters: any
 	
-	constructor(parameters: { colors?: any }, parent?: Symbol) {
+	constructor(parameters: { effects?: any }, parent?: Symbol) {
 		this.parent = parent
 		this.initializeParameters(parameters)
 		this.gui = null
 
-		this.colorGenerator = null
+		this.effects = []
+		this.effectCount = 0
 
-		if(parameters.colors != null) {
-			this.colorGenerator = ColorGenerator.createColorGenerator(parameters.colors.type, parameters.colors.parameters, this)
+		if(parameters.effects != null) {
+			for(let effect of parameters.effects) {
+				Effect.createEffect(effect.type, effect.parameters, this)
+			}
 		}
 	}
 
@@ -71,31 +77,52 @@ export class Symbol implements SymbolInterface {
 		}
 	}
 
-	getColorGenerator(): ColorGenerator {
-		let colorGenerator = this.colorGenerator
-		if(colorGenerator == null) {
+	getEffects(): Effect[] {
+		let effects = this.effects
+		if(this.effects.length == 0) {
 			if(this.parent != null) {
-				colorGenerator = this.parent.getColorGenerator()
+				effects = this.parent.getEffects()
 			} else {
-				colorGenerator = new ColorGenerator({}, this)
-				colorGenerator.createGUI(this.gui)
-				this.colorGenerator = colorGenerator
+				Effect.createDefaultEffect(this)
+				return this.effects
 			}
 		}
-		return colorGenerator
+		return effects
+	}
+
+	applyEffects(positions: number[], item: paper.Path, container: Bounds): void {
+		for(let effect of this.getEffects()) {
+			effect.applyEffect(positions, item, container)
+		}
 	}
 
 	createGUI(gui: dat.GUI) {
 		this.gui = gui
 		this.addTypeOnGUI(gui, (<typeof Symbol>this.constructor).type)
 		this.addGUIParameters(gui)
-		this.createColorGUI()
+		this.createEffectGUI()
 	}
 
-	createColorGUI() {
-		if(this.colorGenerator != null) {
-			this.colorGenerator.createGUI(this.gui)
+	createEffectGUI() {
+		this.effectsFolder = this.gui.addFolder('Effects')
+		
+		if(this.effects.length > 0) {
+			this.effectsFolder.open()
 		}
+
+		let i = 1
+		for(let effect of this.effects) {
+			effect.createGUI(this.effectsFolder, ++this.effectCount)
+		}
+
+		this.addEffectButton = this.effectsFolder.add(this, 'addEffect').name('Add effect')
+	}
+
+	recreateEffectGUI() {
+		let gui: any = this.gui
+		gui.removeFolder(this.effectsFolder)
+		this.effectCount = 0
+		this.createEffectGUI()
 	}
 
 	addTypeOnGUI(gui: dat.GUI, type: string) {
@@ -107,20 +134,42 @@ export class Symbol implements SymbolInterface {
 	addGUIParameters(gui: dat.GUI) {
 	}
 
-	changeColorGenerator(type: string) {
-		this.colorGenerator.removeGUI()
-		this.colorGenerator = ColorGenerator.createColorGenerator(type, {}, this)
-		this.createColorGUI()
+	addEffect() {
+		let effect = Effect.createEffect('random-hue', {}, this)
+		this.updateEffectsJSON()
+		this.recreateEffectGUI()
+	}
+
+	changeEffect(effect: Effect, type: string) {
+		let index = this.effects.indexOf(effect)
+		this.effects.splice(index, 1)
+		Effect.createEffect(type, {}, this, index)
+		this.updateEffectsJSON()
+		this.recreateEffectGUI()
+	}
+
+	removeEffect(effect: Effect) {
+		let effectIndex = this.effects.indexOf(effect)
+		this.effects.splice(effectIndex, 1)
+		this.updateEffectsJSON()
+		this.recreateEffectGUI()
+	}
+
+	setEffects(effects: Effect[]) {
+		this.effects = effects
+		this.updateEffectsJSON()
+	}
+
+	updateEffectsJSON() {
+		this.parameters.effects = []
+		for(let effect of this.effects) {
+			this.parameters.effects.push(effect.getJSON())
+		}
 	}
 
 	changeSymbol(type: string) {
 
 		if(this.parent == null) {
-	
-			if(this.colorGenerator != null) {
-				this.colorGenerator.parentGUI = null
-				this.colorGenerator.gui = null
-			}
 
 			let gui: any = this.gui.parent
 			gui.removeFolder(this.gui)
