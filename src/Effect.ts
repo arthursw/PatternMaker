@@ -1,6 +1,7 @@
 import * as paper from 'paper';
 import { Bounds } from './Bounds';
 import { Symbol } from './Symbol';
+import { raster } from './Raster';
 
 interface EffectConstructor {
 	type: string
@@ -193,6 +194,45 @@ export class Noise extends Effect {
 }
 
 Effect.addEffect(Noise, 'noise')
+
+export class Smooth extends Effect {
+
+	applyEffect(positions: number[], item: paper.Path, container: Bounds): void {
+		item.smooth()
+	}
+}
+
+Effect.addEffect(Smooth, 'smooth')
+
+export class RasterScale extends Effect {
+
+	static defaultParameters = {
+		invert: true,
+		amount: 1
+	}
+
+	parameters: {
+		invert: boolean,
+		amount: number
+	}
+
+	addGUIParameters(gui: dat.GUI) {
+		gui.add(this.parameters, 'invert').name('Invert')
+		gui.add(this.parameters, 'amount', 0, 10).step(0.1).name('Amount')
+	}
+
+	applyEffect(positions: number[], item: paper.Path, container: Bounds): void {
+		if(raster != null && (<any>raster).loaded) {
+			let color = raster.getAverageColor(item.bounds.center)
+			let brightness = color != null ? color.brightness : 1
+			brightness = this.parameters.invert ? 1 - brightness : brightness
+			brightness *= this.parameters.amount
+			item.scale(brightness)
+		}
+	}
+}
+
+Effect.addEffect(RasterScale, 'raster-scale')
 
 export class ThreeStripesColor extends Effect {
 

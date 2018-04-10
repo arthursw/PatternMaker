@@ -1,1 +1,2111 @@
-{}
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"c",
+				"currentY\tproperty"
+			],
+			[
+				"cur",
+				"currentX\tproperty"
+			],
+			[
+				"cu",
+				"currentZ\tproperty"
+			],
+			[
+				"gi",
+				"grid\tproperty"
+			],
+			[
+				"add",
+				"addGUIParametersWithoutSymbol\tmethod"
+			],
+			[
+				"a",
+				"angle\tproperty"
+			],
+			[
+				"crea",
+				"createDefaultEffect\tmethod"
+			],
+			[
+				"cr",
+				"createEffect\tmethod"
+			],
+			[
+				"cre",
+				"createEffectGUI\tmethod"
+			],
+			[
+				"ef",
+				"effectsFolder\tproperty"
+			],
+			[
+				"folde",
+				"effectsFolder\tproperty"
+			],
+			[
+				"_",
+				"__controllers\tproperty"
+			],
+			[
+				"e",
+				"effectCount\tproperty"
+			],
+			[
+				"__",
+				"__folders\tproperty"
+			],
+			[
+				"ad",
+				"addEffectButton\tproperty"
+			],
+			[
+				"GU",
+				"GUIController\tclass"
+			],
+			[
+				"cont",
+				"controller\tlet"
+			],
+			[
+				"se",
+				"segment\tlet"
+			],
+			[
+				"remov",
+				"removeGUI\tmethod"
+			],
+			[
+				"pa",
+				"parentGUI\tproperty"
+			],
+			[
+				"eff",
+				"effectIndex\tlet"
+			],
+			[
+				"sym",
+				"symbol\tproperty"
+			],
+			[
+				"set",
+				"setWH\tmethod"
+			],
+			[
+				"symb",
+				"symbolHasFinished\tproperty"
+			],
+			[
+				"nex",
+				"nextSymbol\tmethod"
+			],
+			[
+				"s",
+				"nSymbolsToCreate\tproperty"
+			],
+			[
+				"ins",
+				"instanceof\tkeyword"
+			],
+			[
+				"C",
+				"createSymbol\tmethod"
+			],
+			[
+				"bou",
+				"boundsList\tproperty"
+			],
+			[
+				"bounds",
+				"boundsList\tproperty"
+			],
+			[
+				"para",
+				"parameters\tparameter"
+			],
+			[
+				"def",
+				"defaultParameters\tparameter"
+			],
+			[
+				"defaul",
+				"defaultParameters\tlet"
+			],
+			[
+				"Color",
+				"ColorGenerator\talias"
+			],
+			[
+				"Colo",
+				"ColorGenerator\talias"
+			],
+			[
+				"hu",
+				"hueRange\tproperty"
+			],
+			[
+				"colo",
+				"colorGeneratorNames\tproperty"
+			],
+			[
+				"pare",
+				"parameters\tlet"
+			],
+			[
+				"create",
+				"createRootSymbol\tmethod"
+			],
+			[
+				"chan",
+				"changeChildSymbol\tmethod"
+			],
+			[
+				"par",
+				"parentGUI\tparameter"
+			],
+			[
+				"Sym",
+				"Symbol\tclass"
+			],
+			[
+				"ne",
+				"nextCurrentSymbol\tmethod"
+			],
+			[
+				"Pla",
+				"PlacerMinMax\tclass"
+			],
+			[
+				"Placer",
+				"PlacerXYZ\tclass"
+			],
+			[
+				"Random",
+				"RandomShapeGenerator\tclass"
+			],
+			[
+				"Shap",
+				"ShapeProbability\ttype"
+			],
+			[
+				"de",
+				"defaultClosed\tproperty"
+			],
+			[
+				"default",
+				"defaultVertexIndices\tproperty"
+			],
+			[
+				"Shape",
+				"ShapeGenerator\tclass"
+			],
+			[
+				"Sy",
+				"Symbol\tclass"
+			],
+			[
+				"in",
+				"index\tlet"
+			],
+			[
+				"ver",
+				"vertexIndices\tproperty"
+			],
+			[
+				"new",
+				"newVertices\tlet"
+			],
+			[
+				"type",
+				"typeof\tkeyword"
+			],
+			[
+				"on",
+				"onChange\tproperty"
+			],
+			[
+				"requ",
+				"requestAnimationFrame\tfunction"
+			],
+			[
+				"n",
+				"nCreatedSymbols\tproperty"
+			],
+			[
+				"ve",
+				"vertexIndices\tproperty"
+			],
+			[
+				"ex",
+				"extends\tkeyword"
+			],
+			[
+				"Symb",
+				"SymbolInterface\tinterface"
+			],
+			[
+				"r",
+				"rectangle\tproperty"
+			],
+			[
+				"setW",
+				"setWidth\tmethod"
+			],
+			[
+				"over",
+				"overflow-y"
+			],
+			[
+				"di",
+				"display"
+			],
+			[
+				"file",
+				"fileName\tparameter"
+			],
+			[
+				"loadF",
+				"loadFilesFromLocalStorage\tlet"
+			],
+			[
+				"loc",
+				"localStorage\tvar"
+			],
+			[
+				"lo",
+				"localStorage\tvar"
+			],
+			[
+				"evet",
+				"event\tparameter"
+			],
+			[
+				"R",
+				"Rectangle\tclass"
+			],
+			[
+				"inn",
+				"innerHeight\tproperty"
+			],
+			[
+				"d",
+				"display"
+			],
+			[
+				"outer",
+				"outerWidth\tmethod"
+			],
+			[
+				"mouse",
+				"mousemove\tmethod"
+			],
+			[
+				"sy",
+				"symbol1Parameters\tlet"
+			],
+			[
+				"ace",
+				"ace-builds\texternal module name"
+			],
+			[
+				"re",
+				"remove\tmethod"
+			],
+			[
+				"Ran",
+				"RandomShapeGenerator\tclass"
+			],
+			[
+				"const",
+				"constructor\tkeyword"
+			],
+			[
+				"cra",
+				"createSymbolGUI\tmethod"
+			],
+			[
+				"shape",
+				"shapeProbability\tlet"
+			],
+			[
+				"Symbo",
+				"SymbolsGrid\tclass"
+			],
+			[
+				"Thr",
+				"ThreeStripesGrid\tclass"
+			],
+			[
+				"Map",
+				"MediaKeyStatusMap\tinterface"
+			],
+			[
+				"Shapr",
+				"ShapeGeneratorConstructor\tinterface"
+			],
+			[
+				"parse",
+				"parseSymbol\tlet"
+			],
+			[
+				"shap",
+				"shapeProbability\tlet"
+			],
+			[
+				"pol",
+				"polygonOnBoxParameterProbabilities\tlet"
+			],
+			[
+				"rad",
+				"radiusRatio\tproperty"
+			],
+			[
+				"p",
+				"probability\tproperty"
+			],
+			[
+				"Parame",
+				"ParameterProbability\ttype"
+			],
+			[
+				"siz",
+				"sizeRatio\tproperty"
+			],
+			[
+				"verte",
+				"vertexNames\tproperty"
+			],
+			[
+				"clear",
+				"clearHistory"
+			],
+			[
+				"windo",
+				"windowSize"
+			],
+			[
+				"update",
+				"updateCursor"
+			],
+			[
+				"selec",
+				"selectedTool"
+			],
+			[
+				"raster",
+				"rasterGroup"
+			],
+			[
+				"sign",
+				"signOffsets"
+			],
+			[
+				"draw",
+				"drawMoves"
+			],
+			[
+				"creaet",
+				"createImportImageButton"
+			],
+			[
+				"handl",
+				"handlePath"
+			],
+			[
+				"S",
+				"ShapeGenerator\tclass"
+			],
+			[
+				"sub",
+				"submitButtonText"
+			],
+			[
+				"data",
+				"data-i18n"
+			],
+			[
+				"lab",
+				"labelJ"
+			],
+			[
+				"hand",
+				"handlePos"
+			],
+			[
+				"handle",
+				"handleSize"
+			],
+			[
+				"rast",
+				"raster"
+			],
+			[
+				"bottom",
+				"bottomCenter"
+			],
+			[
+				"bot",
+				"bottomRight"
+			],
+			[
+				"bott",
+				"bottomLeft"
+			],
+			[
+				"dragging",
+				"draggingImageLastPosition"
+			],
+			[
+				"move",
+				"move-handle"
+			],
+			[
+				"pre",
+				"previousLength"
+			],
+			[
+				"ras",
+				"raster"
+			],
+			[
+				"error",
+				"errorMessage"
+			],
+			[
+				"showPart",
+				"showPattern"
+			],
+			[
+				"export",
+				"exportJSON"
+			],
+			[
+				"refe",
+				"referenceShape"
+			],
+			[
+				"select",
+				"selectedShape"
+			],
+			[
+				"ha",
+				"handle1"
+			],
+			[
+				"funct",
+				"functionToApply"
+			],
+			[
+				"appl",
+				"applyOnChildren"
+			],
+			[
+				"app",
+				"applyOnChildren"
+			],
+			[
+				"han",
+				"handle"
+			],
+			[
+				"dele",
+				"deleteReferenceShape"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "index.html",
+			"settings":
+			{
+				"buffer_size": 1231,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/index.ts",
+			"settings":
+			{
+				"buffer_size": 4841,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/Symbol.ts",
+			"settings":
+			{
+				"buffer_size": 4907,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "Searching 466 files for \"parameters.colors\" (case sensitive)\n\n/Users/Arthur/Projects/Tiny/PatternMaker/src/Symbol.ts:\n   43  \n   44  \t\tif(parameters.effects != null) {\n   45: \t\t\tthis.effects = Effect.createEffect(parameters.colors.type, parameters.colors.parameters, this)\n   46  \t\t}\n   47  \t}\n   ..\n  123  \t\tthis.effect = Effect.createEffect(type, {}, this)\n  124  \t\tthis.createEffectGUI()\n  125: \t\tthis.parameters.colors = this.effect.getJSON()\n  126  \t}\n  127  \n\n3 matches in 1 file\n\n\nSearching 466 files for \"createEffectGUI\" (case sensitive)\n\n/Users/Arthur/Projects/Tiny/PatternMaker/src/Symbol.ts:\n   97  \t\tthis.addTypeOnGUI(gui, (<typeof Symbol>this.constructor).type)\n   98  \t\tthis.addGUIParameters(gui)\n   99: \t\tthis.createEffectGUI()\n  100  \t}\n  101  \n  102: \tcreateEffectGUI() {\n  103  \t\tthis.effectFolder = this.gui.addFolder('Effect')\n  104  \t\tthis.effectFolder.add(this, 'addEffect')\n  ...\n  124  \t\tthis.effect.removeGUI()\n  125  \t\tthis.effect = Effect.createEffect(type, {}, this)\n  126: \t\tthis.createEffectGUI()\n  127  \t\tthis.parameters.colors = this.effect.getJSON()\n  128  \t}\n\n3 matches in 1 file\n\n\nSearching 466 files for \"insert\" (case sensitive)\n\n/Users/Arthur/Projects/Tiny/PatternMaker/node_modules/rxjs/src/util/Immediate.ts:\n  205  \n  206        let handle = instance.addFromSetImmediateArguments(arguments);\n  207:       // Create a <script> element; its readystatechange event will be fired asynchronously once it is inserted\n  208        // into the document. Do so, thus queuing up the task. Remember to clean up once it's been called.\n  209        let script = doc.createElement('script');\n\n/Users/Arthur/Projects/Tiny/PatternMaker/node_modules/rxjs/src/util/root.ts:\n   21  \n   22  // Workaround Closure Compiler restriction: The body of a goog.module cannot use throw.\n   23: // This is needed when used with angular/tsickle which inserts a goog.module statement.\n   24  // Wrap in IIFE\n   25  (function () {\n\n/Users/Arthur/Projects/Tiny/PatternMaker/src/Placer.ts:\n  695  \t\t\tfolder = gui.addFolder('Symbol' + i)\n  696  \t\t\tif(gui.__folders.hasOwnProperty('Colors')) {\n  697: \t\t\t\t$((<any>gui.__folders).Colors.domElement).insertAfter(folder.domElement)\n  698  \t\t\t}\n  699  \t\t\tfolder.open()\n\n3 matches across 3 files\n\n\nSearching 466 files for \"removeFolder\" (case sensitive)\n\n/Users/Arthur/Projects/Tiny/PatternMaker/src/Effect.ts:\n  116  \tremoveGUI() {\n  117  \t\tlet gui: any = this.effectsFolder\n  118: \t\tgui.removeFolder(this.gui.parent)\n  119  \t}\n  120  \n  121  \temptyGUI() {\n  122  \t\tlet gui: any = this.gui\n  123: \t\tgui.parent.removeFolder(this.gui)\n  124  \t}\n  125  \n\n/Users/Arthur/Projects/Tiny/PatternMaker/src/GUI.ts:\n   33  \tlet folders = { ...folder.__folders }\n   34  \tfor(let name in folders) {\n   35: \t\t(<any>folder).removeFolder(folders[name])\n   36  \t}\t\n   37  }\n\n/Users/Arthur/Projects/Tiny/PatternMaker/src/index.ts:\n  123  \tlet rootGUI: any = gui\n  124  \tif(rootGUI.__folders['Symbol']) {\n  125: \t\trootGUI.removeFolder(rootGUI.__folders['Symbol'])\n  126  \t}\n  127  \n\n/Users/Arthur/Projects/Tiny/PatternMaker/src/Placer.ts:\n  655  \t\t\tlet gui: any = this.gui\n  656  \t\t\tlet folder = this.folders[index]\n  657: \t\t\tgui.removeFolder(folder)\n  658  \t\t\tthis.folders.splice(index, 1)\n  659  \t\t}\n\n/Users/Arthur/Projects/Tiny/PatternMaker/src/Symbol.ts:\n  121  \trecreateEffectGUI() {\n  122  \t\tlet gui: any = this.gui\n  123: \t\tgui.removeFolder(this.effectsFolder)\n  124  \t\tthis.createEffectGUI()\n  125  \t}\n  ...\n  181  \n  182  \t\t\tlet gui: any = this.gui.parent\n  183: \t\t\tgui.removeFolder(this.gui)\n  184  \n  185  \t\t\tlet event = new CustomEvent('changeParameters', { detail: { parameters: { symbol: { type: type, parameters: {} }}} })\n\n7 matches across 5 files\n",
+			"settings":
+			{
+				"buffer_size": 3696,
+				"line_ending": "Unix",
+				"name": "Find Results",
+				"scratch": true
+			}
+		},
+		{
+			"file": "src/Placer.ts",
+			"settings":
+			{
+				"buffer_size": 23260,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/Bounds.ts",
+			"settings":
+			{
+				"buffer_size": 1826,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/Effect.ts",
+			"settings":
+			{
+				"buffer_size": 6998,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "styles.css",
+			"settings":
+			{
+				"buffer_size": 2118,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/GUI.ts",
+			"settings":
+			{
+				"buffer_size": 1159,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/Tools.ts",
+			"settings":
+			{
+				"buffer_size": 4470,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/Shape.ts",
+			"settings":
+			{
+				"buffer_size": 5146,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "rein",
+		"selected_items":
+		[
+			[
+				"rein",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"lower",
+				"Convert Case: Lower Case"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"indent",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"conver",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"convertto",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"tab ",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"json",
+				"JSON Reindent: reindent file or selection"
+			],
+			[
+				"error",
+				"TypeScript: Show Error List"
+			]
+		],
+		"width": 444.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/Arthur/Projects/Tiny/PatternMaker",
+		"/Users/Arthur/Projects/Tiny/PatternMaker/patterns",
+		"/Users/Arthur/Projects/Tiny/PatternMaker/src"
+	],
+	"file_history":
+	[
+		"/Users/Arthur/Projects/Tiny/PatternMaker/node_modules/webpack-cli/.nyc_output/549d56f734d76798b4ef15e40a0884af.json",
+		"/Users/Arthur/Projects/Tiny/PatternMaker/src/Utils.ts",
+		"/Users/Arthur/Projects/Tiny/PatternMaker/src/Bounds.ts",
+		"/Users/Arthur/Projects/Tiny/PatternMaker/src/GUI.ts",
+		"/Users/Arthur/Projects/Tiny/PatternMaker/src/Effect.ts",
+		"/Users/Arthur/Projects/Tiny/PatternMaker/styles.css",
+		"/Users/Arthur/Projects/Tiny/PatternMaker/src/ShapeGenerator.ts",
+		"/Users/Arthur/Projects/Tiny/PatternMaker/patterns/pattern.json",
+		"/Users/Arthur/Projects/Tiny/PatternMaker/patterns/infinite-squares.json",
+		"/Users/Arthur/Projects/Tiny/PatternMaker/src/Tools.ts",
+		"/Users/Arthur/Projects/Tiny/PatternMaker/patterns/grids.json",
+		"/Users/Arthur/Projects/Tiny/PatternMaker/patterns/flags.json",
+		"/Users/Arthur/Projects/Tiny/PatternMaker/patterns/simple.json",
+		"/Users/Arthur/Documents/.mdp.txt",
+		"/var/folders/sz/f97g80v149b689p1jvnwybgr0000gn/T/rsub-cxoxcg/access.log",
+		"/var/folders/sz/f97g80v149b689p1jvnwybgr0000gn/T/rsub-nguvph/error.log.1",
+		"/var/folders/sz/f97g80v149b689p1jvnwybgr0000gn/T/rsub-357mp7/comme-un-dessein.access.log.1",
+		"/var/folders/sz/f97g80v149b689p1jvnwybgr0000gn/T/rsub-2zeli2/comme-un-dessein.access.log.A",
+		"/var/folders/sz/f97g80v149b689p1jvnwybgr0000gn/T/rsub-1n6vdr/comme-un-dessein.access.log.A",
+		"/var/folders/sz/f97g80v149b689p1jvnwybgr0000gn/T/rsub-z24_3o/comme-un-dessein.access.log",
+		"/var/folders/sz/f97g80v149b689p1jvnwybgr0000gn/T/rsub-kvf4k8/error.log",
+		"/var/folders/sz/f97g80v149b689p1jvnwybgr0000gn/T/rsub-hs1gsd/nginx_error.log",
+		"/Users/Arthur/Projects/Tiny/PatternMaker/node_modules/paper/dist/paper-full.js",
+		"/Users/Arthur/Projects/Tiny/PatternMaker/node_modules/inquirer/lib/prompts/editor.js",
+		"/Users/Arthur/Projects/Tiny/PatternMaker/src/ColorGenerator.ts",
+		"/Users/Arthur/Projects/Tiny/PatternMaker/src/index.ts",
+		"/Users/Arthur/Projects/Tiny/PatternMaker/src/Placer.ts",
+		"/Users/Arthur/Projects/Tiny/PatternMaker/index.html",
+		"/Users/Arthur/Projects/Tiny/PatternMaker/node_modules/dat.gui/build/dat.gui.js",
+		"/Users/Arthur/Projects/Tiny/PatternMaker/node_modules/dat.gui/build/dat.gui.module.js",
+		"/Users/Arthur/Projects/Tiny/PatternMaker/complex-flags.json",
+		"/Users/Arthur/Projects/Tiny/PatternMaker/package.json",
+		"/Users/Arthur/Projects/Tiny/PatternMaker/node_modules/typescript/lib/tsserverlibrary.js",
+		"/Users/Arthur/Projects/Tiny/PatternMaker/src/Parser.ts",
+		"/Users/Arthur/Projects/Tiny/PatternMaker/tsconfig.json",
+		"/Users/Arthur/Projects/Tiny/PatternMaker/README.md",
+		"/Users/Arthur/Projects/comme-un-dessein-client/js/Items/Paths/Path.js",
+		"/Users/Arthur/Projects/Tiny/Minuit/synth.js",
+		"/Users/Arthur/Projects/Tiny/Minuit/concentricCircles.js",
+		"/Users/Arthur/Projects/BrailleRap/GoToZ-100.gcode",
+		"/Users/Arthur/Projects/comme-un-dessein-server/CommeUnDessein/draw/models.py",
+		"/Users/Arthur/Projects/Tiny/ArsElectronicaServer/index.js",
+		"/Users/Arthur/Projects/Tiny/ArsElectronicaGJ/ts/Flan.ts",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/cvfr/public/index.html",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/cv/public/assets/plugins/bootstrap/.gitattributes",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/cv/config.toml",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2017-09-26-vases.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/public/old/3DImages/Usine.f4v",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2008-11-01-graphic-design.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2008-11-01-graphic-design.fr.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/static/old/3D.xml",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2017-02-01-romanesco.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2017-02-01-romanesco.fr.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/config.toml",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/themes/minimo/layouts/partials/nav/menus/main.html",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/layouts/index.html",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/layouts/partials/head/head.html",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/themes/minimo/layouts/partials/header.html",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/layouts/partials/header.html",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/i18n/fr.toml",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/layouts/_default/list.html",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/i18n/en.toml",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/themes/minimo/i18n/fr.toml",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2007-01-01-3d.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/static/assets/css/custom.css",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2017-10-25-societe-ouverte-lettre-a-xavier-2.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2017-10-25-societe-ouverte-lettre-a-xavier-2.fr.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2014-09-01-logo-detection-and-identification.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2013-08-12-bodybuilding.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2013-08-12-bodybuilding.fr.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2016-10-22-braille-rap.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2016-10-22-braille-rap.fr.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2013-04-19-OIIO.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2013-04-19-OIIO.fr.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2017-10-15-comme-un-dessein.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2017-10-15-comme-un-dessein.fr.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2014-09-01-logo-detection-and-identification.fr.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2008-01-01-generateur-de-sons.fr.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2008-01-01-generateur-de-sons.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2008-07-01-spick.fr.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2008-07-01-spick.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2009-07-30-comme-une-fee.fr.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2009-07-30-comme-une-fee.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2009-08-01-pg-lease.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2010-06-01-arthurmasson-perso.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2010-06-01-simulateur-de-circuits-logiques.fr.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2010-06-01-simulateur-de-circuits-logiques.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2013-01-01-la-douchbox.fr.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2013-01-01-la-douchbox.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2013-02-06-tranches-de-vie.fr.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2013-02-06-tranches-de-vie.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2013-02-24-my-tailer-is-rich.fr.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2013-02-24-my-tailer-is-rich.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2013-04-24-game-watch.fr.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2013-04-24-game-watch.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2015-06-30-euphony-mapping.fr.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2013-06-19-fantasmagorie.fr.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2013-06-19-fantasmagorie.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2013-10-01-misst1guett.fr.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2013-10-01-misst1guett.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2014-10-04-ondes-portees.fr.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2014-10-04-ondes-portees.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2015-12-25-paper-toy.fr.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2015-12-25-paper-toy.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2016-06-21-plateforme-de-reflexion-collaborative.fr.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2016-06-21-plateforme-de-reflexion-collaborative.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2016-10-01-engrenage-musical-musical-game-of-life.fr.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2016-10-01-engrenage-musical-musical-game-of-life.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/layouts/partials/i18nlist.html",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2016-11-01-flan.fr.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2016-11-01-flan.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2016-12-01-ili.fr.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2016-12-01-ili.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2017-02-01-probuilder.fr.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2017-02-01-probuilder.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2017-06-01-idlv-co.fr.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2017-06-01-idlv-co.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2017-06-10-tipibot.fr.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2017-06-10-tipibot.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2017-06-20-gif-jokey.fr.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2017-06-20-gif-jokey.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2017-10-18-societe-ouverte-lettre-a-xavier.fr.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2017-10-18-societe-ouverte-lettre-a-xavier.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2010-06-01-arthurmasson-perso.fr.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2009-08-01-pg-lease.fr.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/content/post/2007-01-01-3d.fr.md",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/public/assets/js/custom.js",
+		"/Users/Arthur/Projects/Sites/arthurmasson-hugo/arthurmasson/themes/cocoa-eh/layouts/partials/head.html"
+	],
+	"find":
+	{
+		"height": 39.0
+	},
+	"find_in_files":
+	{
+		"height": 101.0,
+		"where_history":
+		[
+			"src/*.ts",
+			"patterns/*.json",
+			"src/*.ts",
+			"patterns/*.json",
+			"PatternMaker/src/*.ts",
+			"/src/*.ts",
+			"src/*.ts",
+			"ts/*.ts",
+			"",
+			"src/*.ts",
+			"*.ts"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"position",
+			"NoiseGrid",
+			"createGUI",
+			"setColor",
+			"NoiseGrid",
+			"removeFolder",
+			"gui",
+			"createGUI",
+			"this.gui",
+			"addFolder",
+			"addProbabilityGUI",
+			"createGUI",
+			"this.effectCount",
+			"Effect ",
+			"effects.push",
+			"addEffectButton",
+			"addEffe",
+			"symbol",
+			"setColor",
+			"applyEffect",
+			"Add effect",
+			"insert",
+			"createGUI",
+			"parentGUI",
+			"effectFolder",
+			"effects",
+			"this.symbol.effects = ef",
+			"getJ",
+			"changeChildSymbol",
+			".gui = ",
+			"changeEffect",
+			"createEffectGUI",
+			"this.effects",
+			"parameters.colors",
+			"PolygonOnBoxGenerator",
+			"CircleAbsoluteGenerator",
+			"CircleGenerator",
+			"RectangleAbsoluteGenerator",
+			"RectangleGenerator",
+			"ShapeGenerator",
+			"\"colors\":",
+			"colors?:",
+			"getEffect",
+			"effect",
+			"getEffect",
+			"effect",
+			"this.effect",
+			"effectFolder",
+			"createColorGUI",
+			"colorGenerator",
+			"colorGeneratorNames",
+			"colorGenerators",
+			"Generator",
+			"ColorGenerator",
+			"console.log",
+			"nCreatedSymbols",
+			"symbolHasFinished",
+			"finished",
+			"initializeBounds",
+			"this.states",
+			"random-shape",
+			"placer-xyz",
+			"transform",
+			"parameters: any = null",
+			", parameters: any = null",
+			"parameters",
+			"initializeBounds",
+			"nSymbolsToCreate",
+			"placer",
+			"RandomShapeGenerator",
+			"changeColorGenerator",
+			"this.colors",
+			"this.",
+			"setValue",
+			"createDeleteSymbol",
+			"loadFile",
+			"none",
+			"raster = ",
+			"paper.project.clear()",
+			"editor",
+			"instanceof Array",
+			"losed",
+			"addProbability",
+			"type",
+			"radius",
+			"count",
+			"this.shapeProbabilities",
+			"shapeProbability",
+			"shapeProbabilities",
+			".shapeProbabilities",
+			"parameters",
+			"defaultParameters",
+			"nSymbolsToCreate",
+			"count",
+			"nSymbolsToCreate",
+			"createRootSymbol",
+			"item.fillColor",
+			".alpha",
+			"hasFinished",
+			"createColorGenerator",
+			"addGUIParameters",
+			"symbol",
+			"this.colorGener",
+			"colorGener",
+			"Color",
+			"From",
+			"tyle",
+			"fillColor",
+			"getStrokeColor",
+			"fillColor",
+			"name",
+			"super(parameters",
+			"super(parameters)",
+			"colorG",
+			"CreateSymbol",
+			"createGUI(",
+			"createGUI",
+			"createRootSymbol",
+			"parameters",
+			"container",
+			"createRootSymbol",
+			"container",
+			"rootSymbol",
+			"symbol",
+			"rootCo",
+			"rootS",
+			"container",
+			"changeParameters"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"effectsFolder",
+			"PolygonOnBox",
+			"CircleAbsolute",
+			"Circle",
+			"RectangleAbsolute",
+			"Rectangle",
+			"Shape",
+			"\"effects\":",
+			"effects?:",
+			"createEffectGUI",
+			"effect",
+			"effectNames",
+			"effects",
+			"Effect",
+			"random-symbol",
+			"grid",
+			"RandomPlacer",
+			"this.parameters.palette",
+			"this.parameters.",
+			"nSymbolsToCreate",
+			"this.parameters.shapeProbabilities",
+			"nSymbolsToCreate",
+			"super(parameters, parent)",
+			"createSymbol",
+			"symbol",
+			"createGUI(gui: dat.GUI) {",
+			"}) {",
+			"super(parameters)",
+			"addGUIParameters(gui: dat.GUI) {",
+			"super(parameters)",
+			"}) {",
+			"allIndices",
+			"super(parameters, gui)",
+			"parameters.colors",
+			"colors?: any",
+			"bounds",
+			"rectangle",
+			"reset(bounds: Bounds)",
+			"container: Bounds, positions: number",
+			"bounds",
+			"next(bounds: Bounds",
+			"new(bounds: Bounds",
+			"height",
+			"width",
+			"value",
+			"\", \"",
+			"",
+			"\"",
+			"symbolGenerators",
+			"rectangle",
+			"ShapeProbability",
+			"Grid",
+			"SymbolGenerators"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 4,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1231,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								583,
+								583
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"translate_tabs_to_spaces": false,
+							"typescript_plugin_format_options":
+							{
+								"convertTabsToSpaces": false,
+								"indentSize": 4,
+								"tabSize": 4
+							}
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/index.ts",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4841,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								290,
+								244
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/TypeScript/TypeScript.tmLanguage",
+							"translate_tabs_to_spaces": false,
+							"use_tab_stops": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/Symbol.ts",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4907,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3109,
+								3109
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/TypeScript/TypeScript.tmLanguage",
+							"use_tab_stops": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1495.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3696,
+						"regions":
+						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										213,
+										230
+									],
+									[
+										237,
+										254
+									],
+									[
+										405,
+										422
+									],
+									[
+										726,
+										741
+									],
+									[
+										770,
+										785
+									],
+									[
+										1010,
+										1025
+									],
+									[
+										1444,
+										1450
+									],
+									[
+										1863,
+										1869
+									],
+									[
+										2153,
+										2159
+									],
+									[
+										2439,
+										2451
+									],
+									[
+										2561,
+										2573
+									],
+									[
+										2760,
+										2772
+									],
+									[
+										2954,
+										2966
+									],
+									[
+										3162,
+										3174
+									],
+									[
+										3367,
+										3379
+									],
+									[
+										3511,
+										3523
+									]
+								],
+								"scope": ""
+							}
+						},
+						"selection":
+						[
+							[
+								3377,
+								3377
+							]
+						],
+						"settings":
+						{
+							"detect_indentation": false,
+							"line_numbers": false,
+							"output_tag": 4,
+							"result_base_dir": "",
+							"result_file_regex": "^([^ \t].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1088.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "src/Placer.ts",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 23260,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3576,
+								3576
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/TypeScript/TypeScript.tmLanguage",
+							"translate_tabs_to_spaces": false,
+							"typescript_plugin_format_options":
+							{
+								"convertTabsToSpaces": false,
+								"indentSize": 4,
+								"tabSize": 4
+							},
+							"use_tab_stops": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1597.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "src/Bounds.ts",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1826,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1517,
+								1524
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/TypeScript/TypeScript.tmLanguage",
+							"translate_tabs_to_spaces": false,
+							"use_tab_stops": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "src/Effect.ts",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6998,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								983,
+								983
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/TypeScript/TypeScript.tmLanguage",
+							"translate_tabs_to_spaces": false,
+							"use_tab_stops": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 160.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "styles.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2118,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1898,
+								1898
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1932.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "src/GUI.ts",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1159,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								420,
+								420
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/TypeScript/TypeScript.tmLanguage",
+							"translate_tabs_to_spaces": false,
+							"typescript_plugin_format_options":
+							{
+								"convertTabsToSpaces": false,
+								"indentSize": 4,
+								"tabSize": 4
+							},
+							"use_tab_stops": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "src/Tools.ts",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4470,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/TypeScript/TypeScript.tmLanguage",
+							"translate_tabs_to_spaces": false,
+							"use_tab_stops": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1323.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "src/Shape.ts",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5146,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1024,
+								1024
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/TypeScript/TypeScript.tmLanguage",
+							"translate_tabs_to_spaces": false,
+							"use_tab_stops": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 349.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 38.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.doc":
+	{
+		"height": 0.0
+	},
+	"output.exec":
+	{
+		"height": 114.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "pattern-maker.sublime-project",
+	"replace":
+	{
+		"height": 70.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"plac",
+				"src/Placer.ts"
+			],
+			[
+				"",
+				"src/Effect.ts"
+			],
+			[
+				"shape",
+				"src/Shape.ts"
+			],
+			[
+				"bounds",
+				"src/Bounds.ts"
+			],
+			[
+				"styles",
+				"styles.css"
+			],
+			[
+				"placer",
+				"src/Placer.ts"
+			],
+			[
+				"sym",
+				"src/Symbol.ts"
+			],
+			[
+				"598",
+				"node_modules/webpack-cli/.nyc_output/549d56f734d76798b4ef15e40a0884af.json"
+			],
+			[
+				"tools",
+				"src/Tools.ts"
+			],
+			[
+				"utils",
+				"src/Utils.ts"
+			],
+			[
+				"inde",
+				"src/index.ts"
+			],
+			[
+				"effe",
+				"src/Effect.ts"
+			],
+			[
+				"color",
+				"src/ColorGenerator.ts"
+			],
+			[
+				"boun",
+				"src/Bounds.ts"
+			],
+			[
+				"place",
+				"src/Placer.ts"
+			],
+			[
+				"shap",
+				"src/ShapeGenerator.ts"
+			],
+			[
+				"gui",
+				"src/GUI.ts"
+			],
+			[
+				"symb",
+				"src/Symbol.ts"
+			],
+			[
+				"index",
+				"src/index.ts"
+			],
+			[
+				"simpl",
+				"patterns/simple.json"
+			],
+			[
+				"infin",
+				"patterns/infinite-squares.json"
+			],
+			[
+				"grid",
+				"patterns/grids.json"
+			],
+			[
+				"ind",
+				"src/index.ts"
+			],
+			[
+				"colo",
+				"src/ColorGenerator.ts"
+			],
+			[
+				"paper",
+				"node_modules/paper/dist/paper-full.js"
+			],
+			[
+				"s",
+				"src/Symbol.ts"
+			],
+			[
+				"sha",
+				"src/ShapeGenerator.ts"
+			],
+			[
+				"style",
+				"styles.css"
+			],
+			[
+				"index.ht",
+				"index.html"
+			],
+			[
+				"simple",
+				"patterns/simple.json"
+			],
+			[
+				"flags",
+				"patterns/flags.json"
+			],
+			[
+				"too",
+				"src/Tools.ts"
+			],
+			[
+				"editor",
+				"node_modules/inquirer/lib/prompts/editor.js"
+			],
+			[
+				"bou",
+				"src/Bounds.ts"
+			],
+			[
+				"pla",
+				"src/Placer.ts"
+			],
+			[
+				"comp",
+				"complex-flags.json"
+			],
+			[
+				"dat.gui",
+				"node_modules/dat.gui/build/dat.gui.module.js"
+			],
+			[
+				"index.html",
+				"index.html"
+			],
+			[
+				"tool",
+				"src/Tools.ts"
+			],
+			[
+				"pack",
+				"package.json"
+			],
+			[
+				"par",
+				"src/Parser.ts"
+			],
+			[
+				"util",
+				"src/Utils.ts"
+			],
+			[
+				"r",
+				"README.md"
+			],
+			[
+				"dr",
+				"coffee/Items/Drawing.coffee"
+			],
+			[
+				"path",
+				"coffee/Items/Paths/Path.coffee"
+			],
+			[
+				"draw",
+				"coffee/UI/DrawingPanel.coffee"
+			],
+			[
+				"toolma",
+				"coffee/Tools/ToolManager.coffee"
+			],
+			[
+				"loader",
+				"coffee/Loader.coffee"
+			],
+			[
+				"tim",
+				"coffee/View/Timelapse.coffee"
+			],
+			[
+				"main",
+				"coffee/Main.coffee"
+			],
+			[
+				"v",
+				"coffee/View/View.coffee"
+			],
+			[
+				"load",
+				"coffee/Loader.coffee"
+			],
+			[
+				"pa",
+				"coffee/Items/Paths/Path.coffee"
+			],
+			[
+				"view",
+				"coffee/View/View.coffee"
+			],
+			[
+				"dra",
+				"coffee/Items/Drawing.coffee"
+			],
+			[
+				"era",
+				"coffee/Tools/EraserTool.coffee"
+			],
+			[
+				"move",
+				"coffee/Tools/MoveTool.coffee"
+			],
+			[
+				"pah",
+				"coffee/Tools/PathTool.coffee"
+			],
+			[
+				"pathto",
+				"coffee/Tools/PathTool.coffee"
+			],
+			[
+				"eras",
+				"coffee/Tools/EraserTool.coffee"
+			],
+			[
+				"seel",
+				"coffee/Tools/SelectTool.coffee"
+			],
+			[
+				"patht",
+				"coffee/Tools/PathTool.coffee"
+			],
+			[
+				"toolm",
+				"coffee/Tools/ToolManager.coffee"
+			],
+			[
+				"sele",
+				"coffee/Tools/SelectTool.coffee"
+			],
+			[
+				"aler",
+				"coffee/UI/AlertManager.coffee"
+			],
+			[
+				"modal",
+				"coffee/UI/Modal.coffee"
+			],
+			[
+				"gird",
+				"coffee/View/Grid.coffee"
+			],
+			[
+				"preci",
+				"coffee/Items/Paths/PrecisePaths/PrecisePath.coffee"
+			],
+			[
+				"mod",
+				"coffee/UI/Modal.coffee"
+			],
+			[
+				"media",
+				"coffee/Items/Divs/Media.coffee"
+			],
+			[
+				"app",
+				"coffee/App.coffee"
+			],
+			[
+				"commen",
+				"coffee/Commands/Command.coffee"
+			],
+			[
+				"drawin",
+				"coffee/Items/Drawing.coffee"
+			],
+			[
+				"space",
+				"content/post/2018-02-05-space-filling-curves.fr.md"
+			],
+			[
+				"ajax",
+				"CommeUnDessein/draw/ajax.py"
+			],
+			[
+				"monmodels",
+				"CommeUnDessein/draw/mongoModels.py"
+			],
+			[
+				"model",
+				"CommeUnDessein/draw/models.py"
+			],
+			[
+				"commo",
+				"CommeUnDessein/static/locales/fr/common.json"
+			],
+			[
+				"main.sc",
+				"scss/main.scss"
+			],
+			[
+				"webc",
+				"ts/Webcam.ts"
+			],
+			[
+				"bpm",
+				"ts/BPM.ts"
+			],
+			[
+				"shader",
+				"ts/ShaderManager.ts"
+			],
+			[
+				"rea",
+				"README.md"
+			],
+			[
+				"mongom",
+				"CommeUnDessein/draw/mongoModels.py"
+			],
+			[
+				"urls",
+				"CommeUnDessein/draw/urls.py"
+			],
+			[
+				"aja",
+				"CommeUnDessein/draw/ajax.py"
+			],
+			[
+				"con",
+				"config.yaml"
+			],
+			[
+				"about",
+				"public/assets/plugins/bootstrap/.gitattributes"
+			],
+			[
+				"config",
+				"config.toml"
+			],
+			[
+				"pots",
+				"content/post/2017-09-26-pots-de-fleurs-generatifs.md"
+			],
+			[
+				"vases",
+				"content/post/2017-09-26-vases.md"
+			],
+			[
+				"inter",
+				"content/post/2015-06-27-interactive-crowd.fr.md"
+			],
+			[
+				"dun",
+				"public/old/3DImages/Usine.f4v"
+			],
+			[
+				"fr.t",
+				"i18n/fr.toml"
+			],
+			[
+				"en.",
+				"i18n/en.toml"
+			],
+			[
+				"engre",
+				"content/post/2016-10-01-engrenage-musical-musical-game-of-life.fr.md"
+			],
+			[
+				"engr",
+				"content/post/2016-10-01-engrenage-musical-musical-game-of-life.md"
+			],
+			[
+				"flan",
+				"content/post/2016-11-01-flan.fr.md"
+			],
+			[
+				"odyssee",
+				"content/post/2016-06-30-odyssee-urbaine.fr.md"
+			],
+			[
+				"odyss",
+				"content/post/2016-06-30-odyssee-urbaine.md"
+			],
+			[
+				"wis",
+				"content/post/2012-09-18-wisdom.fr.md"
+			],
+			[
+				"wisdom",
+				"content/post/2012-09-18-wisdom.fr.md"
+			],
+			[
+				"odysse",
+				"content/post/2016-06-30-odyssee-urbaine.md"
+			],
+			[
+				"graph",
+				"content/post/2008-11-01-graphic-design.fr.md"
+			],
+			[
+				"custom",
+				"static/assets/js/custom.js"
+			],
+			[
+				"wisdm",
+				"content/post/2012-09-18-wisdom.fr.md"
+			],
+			[
+				"vila",
+				"content/post/2012-09-30-vilaine-ballade.fr.md"
+			],
+			[
+				"vilain",
+				"content/post/2012-09-30-vilaine-ballade.md"
+			],
+			[
+				"balalde.fr",
+				"content/post/2012-09-30-vilaine-ballade.fr.md"
+			],
+			[
+				"vilaine",
+				"content/post/2012-09-30-vilaine-ballade.md"
+			],
+			[
+				"lesmu",
+				"content/post/2013-11-18-les-murs-ont-des-yeux.md"
+			],
+			[
+				"les",
+				"content/post/2013-11-18-les-murs-ont-des-yeux.fr.md"
+			],
+			[
+				"lesmur",
+				"content/post/2013-11-18-les-murs-ont-des-yeux.md"
+			],
+			[
+				"3d.mr",
+				"content/post/2007-01-01-3d.fr.md"
+			],
+			[
+				"3d",
+				"static/old/3D.xml"
+			],
+			[
+				"arbres",
+				"content/post/2013-05-22-arbres-et-visages.fr.md"
+			],
+			[
+				"rom",
+				"content/post/2017-02-01-romanesco.fr.md"
+			],
+			[
+				"roman",
+				"content/post/2017-02-01-romanesco.md"
+			],
+			[
+				"menu",
+				"themes/minimo/layouts/partials/nav/menus/main.html"
+			],
+			[
+				"conf",
+				"config.toml"
+			],
+			[
+				"cust",
+				"static/assets/css/custom.css"
+			],
+			[
+				"tipi",
+				"content/post/2017-06-10-tipibot.fr.md"
+			],
+			[
+				"tipibo",
+				"content/post/2017-06-10-tipibot.md"
+			],
+			[
+				".css",
+				"static/assets/css/custom.css"
+			],
+			[
+				".js",
+				"static/assets/js/custom.js"
+			],
+			[
+				"index.",
+				"layouts/index.html"
+			],
+			[
+				"head",
+				"themes/cocoa-eh/layouts/partials/head.html"
+			],
+			[
+				"game",
+				"content/post/2013-04-24-game-watch.md"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"~/Projects/SublimeProjects/ProBuilderTS.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"TreeW",
+				"UJavascriptTreeView::RebuildWidget"
+			],
+			[
+				"FTransaction",
+				"FJavascriptTransaction"
+			],
+			[
+				"UTransBuffer",
+				"UTransBuffer"
+			],
+			[
+				"actor",
+				"ActorBeginOverlap"
+			]
+		],
+		"width": 566.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 317.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

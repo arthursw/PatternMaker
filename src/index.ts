@@ -5,6 +5,7 @@ import { Bounds } from './Bounds';
 import { Symbol, SymbolConstructor } from './Symbol';
 import './Placer';
 import './Shape';
+import './Raster';
 import { createGUI } from './GUI';
 
 let w:any = <any>window;
