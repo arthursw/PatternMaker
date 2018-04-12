@@ -157,6 +157,9 @@ export class Symbol implements SymbolInterface {
 
 	setEffects(effects: Effect[]) {
 		this.effects = effects
+		for(let effect of effects) {
+			effect.symbol = this
+		}
 		this.updateEffectsJSON()
 	}
 

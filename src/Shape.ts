@@ -1,5 +1,4 @@
 import * as paper from 'paper';
-import { emptyFolder } from './GUI';
 import { Bounds } from './Bounds';
 import { Symbol, SymbolConstructor } from './Symbol';
 import { Effect } from './Effect';

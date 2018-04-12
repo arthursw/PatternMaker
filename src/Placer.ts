@@ -1,7 +1,6 @@
 import * as paper from 'paper';
 import * as dat from 'dat.gui'
 import { sizeToPoint } from './Utils';
-import { emptyFolder } from './GUI';
 import { Bounds } from './Bounds';
 import { Symbol } from './Symbol';
 import { Effect, RandomColorFromPalette } from './Effect';
@@ -67,11 +66,15 @@ export class Placer extends Symbol {
 	
 	changeChildSymbol(symbol: Symbol, type: string) {
 		let effects = this.symbol.effects
-		emptyFolder(this.folder)
+
+		let gui: any = this.gui
+		gui.removeFolder(this.folder)
 
 		this.symbol = Symbol.createSymbol(type, {}, this)
-		this.symbol.createGUI(this.folder)
 		this.symbol.setEffects(effects)
+		this.addSymbolGUI(this.gui)
+
+		this.recreateEffectGUI()
 	}
 
 	initializeBounds(bounds: Bounds) {
@@ -496,6 +499,9 @@ export class PlacerXYZ extends PlacerY {
 
 		// Here this.parameters has both the full hierarchy described above, 
 		// and 'with', 'height', 'margin' and 'scale' at the root (but those will not update automatically with the gui)
+
+		let symbol: any = this.symbol
+		symbol.symbol.symbol.parent = this
 	}
 
 	getJSON() {
@@ -524,6 +530,21 @@ export class PlacerXYZ extends PlacerY {
 		
 		symbol.symbol.gui = gui
 		symbol.symbol.folder = this.folder
+	}
+
+	changeChildSymbol(symbol: Symbol, type: string) {
+		let line: any = this.symbol
+
+		let effects = line.symbol.symbol.effects
+
+		let gui: any = this.gui
+		gui.removeFolder(this.folder)
+
+		line.symbol.symbol = Symbol.createSymbol(type, {}, this)
+		line.symbol.symbol.setEffects(effects)
+		this.addSymbolGUI(this.gui)
+
+		this.recreateEffectGUI()
 	}
 
 	addGUIParametersWithoutSymbol(gui: dat.GUI) {
@@ -771,13 +792,30 @@ export class RandomPlacer extends Symbol {
 
 	addGUIParameters(gui: dat.GUI) {
 		gui.add(this, 'addSymbol').name('Add symbol')
+		this.addProbabilitiesGUI()
+	}
+	
+	addProbabilitiesGUI() {
 		let i=0
 		for(let shapeProbability of this.parameters.shapeProbabilities) {
-			this.addProbabilityGUI(shapeProbability, gui, i)
+			this.addProbabilityGUI(shapeProbability, this.gui, i)
 			i++
 		}
 	}
-	
+
+	removeProbabilitiesGUI() {
+		let parent: any = this.gui
+		for(let folder of this.folders) {
+			parent.removeFolder(folder)
+		}
+		this.folders = []
+	}
+
+	recreateProbabilitiesGUI() {
+		this.removeProbabilitiesGUI()
+		this.addProbabilitiesGUI()
+	}
+
 	createDeleteSymbol(shapeProbability: ShapeProbability) {
 		return ()=> {
 			this.totalWeight -= shapeProbability.weight
@@ -806,15 +844,11 @@ export class RandomPlacer extends Symbol {
 
 		let effects = this.symbols[index].effects
 
-		let folder = this.folders[index]
-
-		emptyFolder(folder)
-
 		shapeProbability.parameters  = {}
 		this.symbols[index] = Symbol.createSymbol(type, {}, this)
 		this.symbols[index].setEffects(effects)
 
-		this.addProbabilityGUI(shapeProbability, this.gui, index, folder)
+		this.recreateProbabilitiesGUI()
 	}
 
 	addProbability(shapeProbability: ShapeProbability) {

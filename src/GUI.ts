@@ -24,14 +24,14 @@ export let createGUI = (parameters: { generation: string, speed: number, nSymbol
 	return gui
 }
 
-export let emptyFolder = (folder: dat.GUI)=> {
+// export let emptyFolder = (folder: dat.GUI)=> {
 	
-	for(let controller of folder.__controllers.slice()) {
-		folder.remove(controller)
-	}
+// 	for(let controller of folder.__controllers.slice()) {
+// 		folder.remove(controller)
+// 	}
 
-	let folders = { ...folder.__folders }
-	for(let name in folders) {
-		(<any>folder).removeFolder(folders[name])
-	}	
-}
+// 	let folders = { ...folder.__folders }
+// 	for(let name in folders) {
+// 		(<any>folder).removeFolder(folders[name])
+// 	}
+// }
