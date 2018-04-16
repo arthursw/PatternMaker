@@ -81,7 +81,7 @@ export class Placer extends Symbol {
 		this.bounds = bounds.clone()
 	}
 
-	transform() {
+	transform(bounds: Bounds) {
 		this.nCreatedSymbols++
 	}
 
@@ -102,7 +102,7 @@ export class Placer extends Symbol {
 		let result = this.nextSymbol(bounds, container, positions)
 
 		if(this.symbol.hasFinished()) {
-			this.transform()
+			this.transform(bounds)
 			this.symbol.reset(this.bounds)
 		}
 		
@@ -231,10 +231,6 @@ export class QuadTree extends Placer {
 Symbol.addSymbol(QuadTree, 'quadtree')
 
 export class PlacerX extends Placer {
-
-	constructor(parameters: { nSymbolsToCreate: number, symbol: any, effects?: any }, parent?: Symbol) {
-		super(parameters, parent)
-	}
 	
 	addGUIParametersWithoutSymbol(gui: dat.GUI) {
 		gui.add(this.parameters, 'nSymbolsToCreate', 1, 100).step(1).name('Width')
@@ -245,8 +241,8 @@ export class PlacerX extends Placer {
 		this.bounds.setWidth(bounds.rectangle.width / this.parameters.nSymbolsToCreate)
 	}
 
-	transform() {
-		super.transform()
+	transform(bounds: Bounds) {
+		super.transform(bounds)
 		this.bounds.setX(this.bounds.rectangle.x + this.bounds.rectangle.width)
 	}
 }
@@ -255,10 +251,6 @@ Symbol.addSymbol(PlacerX, 'line')
 
 export class PlacerY extends Placer {
 
-	constructor(parameters: { nSymbolsToCreate: number, symbol: any, effects?: any }, parent?: Symbol) {
-		super(parameters, parent)
-	}
-	
 	addGUIParametersWithoutSymbol(gui: dat.GUI) {
 		gui.add(this.parameters, 'nSymbolsToCreate', 1, 100).step(1).name('Height')
 	}
@@ -268,13 +260,136 @@ export class PlacerY extends Placer {
 		this.bounds.setHeight(bounds.rectangle.height / this.parameters.nSymbolsToCreate)
 	}
 
-	transform() {
-		super.transform()
+	transform(bounds: Bounds) {
+		super.transform(bounds)
 		this.bounds.setY(this.bounds.rectangle.y + this.bounds.rectangle.height)
 	}
 }
 
 Symbol.addSymbol(PlacerY, 'column')
+
+export class RandomPlacerX extends PlacerX {
+	
+	static defaultParameters = { ...PlacerX.defaultParameters, widthMin: 2, widthMax: 5 }
+
+	parameters: {
+		widthMin: number
+		widthMax: number
+		nSymbolsToCreate: number
+		symbol: {
+			type: string
+			parameters: any
+		}
+	}
+
+	addGUIParametersWithoutSymbol(gui: dat.GUI) {
+		gui.add(this.parameters, 'widthMin', 1, 100).step(1).name('Min width').onChange( () => this.updateNSymbolsToCreate() )
+		gui.add(this.parameters, 'widthMax', 1, 100).step(1).name('Max width').onChange( () => this.updateNSymbolsToCreate() )
+	}
+
+	updateNSymbolsToCreate() {
+		this.parameters.nSymbolsToCreate = this.parameters.widthMin + Math.round(Math.random() * Math.abs(this.parameters.widthMax - this.parameters.widthMin))
+	}
+
+	reset(bounds: Bounds) {
+		this.updateNSymbolsToCreate()
+		super.reset(bounds)
+	}
+}
+
+Symbol.addSymbol(RandomPlacerX, 'random-line')
+
+export class RandomPlacerY extends PlacerY {
+	
+	static defaultParameters = { ...PlacerX.defaultParameters, heightMin: 2, heightMax: 5 }
+
+	parameters: {
+		heightMin: number
+		heightMax: number
+		nSymbolsToCreate: number
+		symbol: {
+			type: string
+			parameters: any
+		}
+	}
+
+	addGUIParametersWithoutSymbol(gui: dat.GUI) {
+		gui.add(this.parameters, 'heightMin', 1, 100).step(1).name('Min height').onChange( () => this.updateNSymbolsToCreate() )
+		gui.add(this.parameters, 'heightMax', 1, 100).step(1).name('Max height').onChange( () => this.updateNSymbolsToCreate() )
+	}
+
+	updateNSymbolsToCreate() {
+		this.parameters.nSymbolsToCreate = this.parameters.heightMin + Math.round(Math.random() * Math.abs(this.parameters.heightMax - this.parameters.heightMin))
+	}
+
+	reset(bounds: Bounds) {
+		this.updateNSymbolsToCreate()
+		super.reset(bounds)
+	}
+}
+
+Symbol.addSymbol(RandomPlacerY, 'random-column')
+
+class IrregularPlacer {
+
+	static initializeRandomValues(nSymbolsToCreate: number): number[] {
+		let values = []
+		let total = 0
+		for(let i=0 ; i<nSymbolsToCreate ; i++) {
+			let value = Math.random()
+			values.push(value)
+			total += value
+		}
+		for(let i=0 ; i<nSymbolsToCreate ; i++) {
+			values[i] /= total
+		}
+		return values
+	}
+}
+
+export class IrregularPlacerX extends RandomPlacerX {
+	
+	values: number[] = []
+	
+	initializeBounds(bounds: Bounds) {
+		this.bounds = bounds.clone()
+		this.bounds.setWidth(this.values[0] * bounds.rectangle.width)
+	}
+
+	updateNSymbolsToCreate() {
+		super.updateNSymbolsToCreate()
+		this.values = IrregularPlacer.initializeRandomValues(this.parameters.nSymbolsToCreate)
+	}
+
+	transform(bounds: Bounds) {
+		super.transform(bounds)
+		this.bounds.setWidth(this.values[this.nCreatedSymbols] * bounds.rectangle.width)
+	}
+}
+
+Symbol.addSymbol(IrregularPlacerX, 'irregular-line')
+
+export class IrregularPlacerY extends RandomPlacerY {
+	
+	values: number[] = []
+	
+	initializeBounds(bounds: Bounds) {
+		this.bounds = bounds.clone()
+		this.bounds.setHeight(this.values[0] * bounds.rectangle.height)
+	}
+	
+	updateNSymbolsToCreate() {
+		super.updateNSymbolsToCreate()
+		this.values = IrregularPlacer.initializeRandomValues(this.parameters.nSymbolsToCreate)
+	}
+
+	transform(bounds: Bounds) {
+		super.transform(bounds)
+		this.bounds.setHeight(this.values[this.nCreatedSymbols] * bounds.rectangle.height)
+	}
+}
+
+Symbol.addSymbol(IrregularPlacerY, 'irregular-column')
 
 export class PlacerZ extends Placer {
 
@@ -306,13 +421,13 @@ export class PlacerZ extends Placer {
 	initializeBounds(bounds: Bounds) {
 		super.initializeBounds(bounds)
 		if(this.parameters.margin) {
-			this.transform()
+			this.transform(bounds)
 			this.nCreatedSymbols--
 		}
 	}
 
-	transform() {
-		super.transform()
+	transform(bounds: Bounds) {
+		super.transform(bounds)
 		let scale = 1 - this.parameters.scale
 		let center = this.bounds.rectangle.center.clone()
 		this.bounds.setWH(this.bounds.rectangle.width * scale, this.bounds.rectangle.height * scale)
@@ -382,7 +497,7 @@ export class RecursivePlacer extends Placer {
 				}
 				placer.bounds = previousState.bounds
 				placer.nCreatedSymbols = previousState.nCreatedSymbols
-				placer.transform()
+				placer.transform(bounds)
 				placer.symbol.reset(placer.bounds)
 				this.bounds = previousState.parentBounds
 			} while(placer.hasFinished())
