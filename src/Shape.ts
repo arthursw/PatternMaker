@@ -199,3 +199,68 @@ export class PolygonOnBox extends Shape {
 }
 
 Symbol.addSymbol(PolygonOnBox, 'polygon-on-box')
+
+export class Polygon extends Shape {
+	
+	static defaultParameters = { 
+		vertices: [[0, 0], [1, 0], [0.5, 0.5]],
+		closed: true
+	}
+
+	parameters: {
+		vertices: number[][]
+		closed: boolean
+	}
+
+	constructor(parameters: { effects?: any, vertices?: number[][], closed?: boolean }, parent?: Symbol) {
+		super(parameters, parent)
+	}
+
+	addGUIParameters(gui: dat.GUI) {
+		let object = {
+			vertices: JSON.stringify(this.parameters.vertices)
+		}
+		gui.add(object, 'vertices').name('Vertices').onFinishChange( (value: string)=> {
+			try {
+				let newVertices = JSON.parse(value)
+				if(Array.isArray(newVertices)) {
+					let allVertices = true
+					for(let i = 0 ; i < newVertices.length ; i++) {
+						if(!Array.isArray(newVertices)) {
+							allVertices = false
+							break
+						}
+					}
+					if(allVertices) {
+						this.parameters.vertices = newVertices
+					}
+				}
+			} catch (error) {
+				console.log(error)
+			}
+		} )
+	}
+
+	next(bounds: Bounds, container: Bounds, positions: number[] = []): paper.Path {
+		let polygon = new paper.Path()
+		let rectangle: any = bounds.rectangle
+		if(this.parameters.vertices == null){
+			polygon.add(rectangle.topCenter)
+			polygon.add(rectangle.bottomLeft)
+			polygon.add(rectangle.bottomRight)
+		}
+		else if(this.parameters.vertices != null) {
+			for(let vertex of this.parameters.vertices) {
+				polygon.add(bounds.rectangle.topLeft.add(new paper.Point(bounds.rectangle.width * vertex[0], bounds.rectangle.height * vertex[1])))
+			}
+		}
+
+		polygon.closed = this.parameters.closed
+
+		this.applyEffects(positions, polygon, container)
+		return polygon
+	}
+
+}
+
+Symbol.addSymbol(Polygon, 'polygon')

@@ -128,6 +128,8 @@ export class Effect {
 export class RandomHue extends Effect {
 
 	static defaultParameters = {
+		target: 'fill',
+		strokeWidth: 1,
 		hue: 180,
 		hueRange: 360,
 		saturation: 1,
@@ -136,6 +138,8 @@ export class RandomHue extends Effect {
 	}
 
 	parameters: {
+		target: string,
+		strokeWidth: number,
 		hue: number
 		hueRange: number
 		saturation: number
@@ -144,15 +148,25 @@ export class RandomHue extends Effect {
 	}
 
 	setColor(positions: number[], item: paper.Path, container: Bounds): void {
-		item.fillColor = new paper.Color({
+		let color = new paper.Color({
 			hue: this.parameters.hue + ( Math.random() - 0.5 ) * this.parameters.hueRange,
 			saturation: this.parameters.saturation,
 			brightness: this.parameters.brightness
 		})
-		item.fillColor.alpha = this.parameters.alpha
+		if(this.parameters.target == 'fill' || this.parameters.target == 'fillStroke') {
+			item.fillColor = color
+			item.fillColor.alpha = this.parameters.alpha
+		}
+		if(this.parameters.target == 'stroke' || this.parameters.target == 'fillStroke') {
+			item.strokeColor = color
+			item.strokeColor.alpha = this.parameters.alpha
+			item.strokeWidth = this.parameters.strokeWidth
+		}
 	}
 
 	addGUIParameters(gui: dat.GUI) {
+		gui.add(this.parameters, 'target').options(['fill', 'stroke', 'fillStroke']).name('Target')
+		gui.add(this.parameters, 'strokeWidth', 0, 10).step(0.1).name('Stroke width')
 		gui.add(this.parameters, 'hue', 0, 360).step(1).name('Hue')
 		gui.add(this.parameters, 'hueRange', 0, 360).step(1).name('Hue range')
 		gui.add(this.parameters, 'saturation', 0, 1).step(0.01).name('Saturation')

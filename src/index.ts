@@ -117,19 +117,25 @@ let parameters = {
 let raster: paper.Raster = null
 let timeoutID: number = null
 let gui: dat.GUI = null
+let symbolFolder: dat.GUI = null
 let symbol: Symbol = null
 let container: Bounds = null
 
 let createRootSymbol = (type: string = null, symbolParameters: any = null)=> {
+	// if(symbolFolder != null) {
+	// 	rootGUI.removeFolder(symbolFolder)
+	// 	symbolFolder = null
+	// }
+	
 	let rootGUI: any = gui
 	if(rootGUI.__folders['Symbol']) {
 		rootGUI.removeFolder(rootGUI.__folders['Symbol'])
 	}
 
-	let folder = gui.addFolder('Symbol')
-	folder.open()
+	symbolFolder = gui.addFolder('Symbol')
+	symbolFolder.open()
 	symbol = Symbol.createSymbol(type != null ? type : parameters.symbol.type, symbolParameters != null ? symbolParameters : parameters.symbol.parameters, null)
-	symbol.createGUI(folder)
+	symbol.createGUI(symbolFolder)
 
 	w.symbol = symbol
 

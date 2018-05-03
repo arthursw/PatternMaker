@@ -444,6 +444,54 @@ export class PlacerZ extends Placer {
 
 Symbol.addSymbol(PlacerZ, 'scaler')
 
+export class PlacerCircle extends Placer {
+
+	static defaultParameters = { ...Placer.defaultParameters,
+		scale: 0.1,
+		angleOffset: 0
+	}
+
+	parameters: {
+		nSymbolsToCreate: number
+		symbol: {
+			type: string
+			parameters: any
+		}
+		scale: number
+		angleOffset: number
+	}
+
+	addGUIParametersWithoutSymbol(gui: dat.GUI) {
+		gui.add(this.parameters, 'nSymbolsToCreate', 1, 360).step(1).name('Symbol number')
+		gui.add(this.parameters, 'angleOffset', 0, 360).step(1).name('Angle offset')
+		gui.add(this.parameters, 'scale', 0, 1).name('Scale')
+	}
+
+	initializeBounds(bounds: Bounds) {
+		super.initializeBounds(bounds)
+		let diameter = Math.min(bounds.rectangle.width, bounds.rectangle.height)
+		let size = diameter * this.parameters.scale
+		this.bounds.setWH(size, size)
+		this.setBoundsPosition(bounds)
+	}
+
+	transform(bounds: Bounds) {
+		super.transform(bounds)
+		this.setBoundsPosition(bounds)
+	}
+
+	setBoundsPosition(bounds: Bounds) {
+		let diameter = Math.min(bounds.rectangle.width, bounds.rectangle.height)
+		let size = diameter * this.parameters.scale
+		let radius = diameter / 4
+		let x = bounds.rectangle.center.x + radius * Math.cos(2 * Math.PI * (this.parameters.angleOffset / 360 + this.nCreatedSymbols / this.parameters.nSymbolsToCreate))
+		let y = bounds.rectangle.center.y + radius * Math.sin(2 * Math.PI * (this.parameters.angleOffset / 360 + this.nCreatedSymbols / this.parameters.nSymbolsToCreate))
+		this.bounds.setXY(x - size / 2, y - size / 2)
+	}
+}
+
+Symbol.addSymbol(PlacerCircle, 'placer-circle')
+
 export class RecursivePlacer extends Placer {
 
 	states: { bounds: Bounds, parentBounds: Bounds, nCreatedSymbols: number }[]
@@ -838,9 +886,10 @@ type ShapeProbability = {
 	parameters: any
 }
 
-export class RandomPlacer extends Symbol {
+export class SymbolListPlacer extends Symbol {
 
 	static defaultParameters = { 
+		random: true,
 		shapeProbabilities: [{
 				weight: 1,
 				type: 'rectangle',
@@ -855,6 +904,7 @@ export class RandomPlacer extends Symbol {
 	symbols: Symbol[]
 	
 	parameters: {
+		random: boolean
 		shapeProbabilities: ShapeProbability[]
 	}
 
@@ -862,6 +912,7 @@ export class RandomPlacer extends Symbol {
 	totalWeight: number
 	currentSymbol: Symbol
 	symbolCount: number
+	currentIndex: number
 
 	constructor(parameters: { effects: { type: string, parameters: any }, shapeProbabilities: ShapeProbability[] }, parent?: Symbol) {
 		super(parameters, parent)
@@ -870,6 +921,7 @@ export class RandomPlacer extends Symbol {
 		this.symbolCount = 0
 		this.folders = []
 		this.currentSymbol = null
+		this.currentIndex = 0
 		
 		this.totalWeight = 0
 		for(let shapeProbability of this.parameters.shapeProbabilities) {
@@ -906,6 +958,7 @@ export class RandomPlacer extends Symbol {
 	}
 
 	addGUIParameters(gui: dat.GUI) {
+		gui.add(this.parameters, 'random').name('Random')
 		gui.add(this, 'addSymbol').name('Add symbol')
 		this.addProbabilitiesGUI()
 	}
@@ -1007,18 +1060,29 @@ export class RandomPlacer extends Symbol {
 			return this.nextCurrentSymbol(bounds, container, positions)
 		}
 
-		let random = Math.random() * this.totalWeight
-		let sum = 0
+		if(this.parameters.random) {
 
-		let i = 0
-		for(let shapeProbability of this.parameters.shapeProbabilities) {
-			sum += shapeProbability.weight
-			if(sum > random) {
-				this.currentSymbol = this.symbols[i]
-				this.currentSymbol.reset(bounds)
-				return this.nextCurrentSymbol(bounds, container, positions)
+			let random = Math.random() * this.totalWeight
+			let sum = 0
+
+			let i = 0
+			for(let shapeProbability of this.parameters.shapeProbabilities) {
+				sum += shapeProbability.weight
+				if(sum > random) {
+					this.currentSymbol = this.symbols[i]
+					this.currentSymbol.reset(bounds)
+					return this.nextCurrentSymbol(bounds, container, positions)
+				}
+				i++
 			}
-			i++
+		} else {
+			this.currentSymbol = this.symbols[Math.floor(this.currentIndex)]
+			this.currentSymbol.reset(bounds)
+			this.currentIndex += 1 / this.parameters.shapeProbabilities[Math.floor(this.currentIndex)].weight
+			if(this.currentIndex >= this.symbols.length) {
+				this.currentIndex = 0
+			}
+			return this.nextCurrentSymbol(bounds, container, positions)
 		}
 
 		return null
@@ -1029,4 +1093,5 @@ export class RandomPlacer extends Symbol {
 	}
 }
 
-Symbol.addSymbol(RandomPlacer, 'random-symbol')
+Symbol.addSymbol(SymbolListPlacer, 'symbol-list')
+Symbol.addSymbol(SymbolListPlacer, 'random-symbol')

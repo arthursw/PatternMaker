@@ -35,15 +35,15 @@
               }
             }
           ],
-          "effects": {
+          "effects": [{
             "type": "random-palette",
             "parameters": {
               "palette": [
-                "red",
-                "blue"
+                "black",
+                "darkblue"
               ]
             }
-          }
+          }]
         }
       }
     }

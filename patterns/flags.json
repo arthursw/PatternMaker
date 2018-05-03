@@ -162,7 +162,7 @@
                       }
                     }
                   ],
-                  "effects": {
+                  "effects": [{
                     "type": "random-palette",
                     "parameters": {
                       "palette": [
@@ -174,7 +174,7 @@
                         "#f2825b"
                       ]
                     }
-                  }
+                  }]
                 }
               }
             }
