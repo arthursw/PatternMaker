@@ -120,6 +120,7 @@ let gui: dat.GUI = null
 let symbolFolder: dat.GUI = null
 let symbol: Symbol = null
 let container: Bounds = null
+let ignoreHashChange = false
 
 let createRootSymbol = (type: string = null, symbolParameters: any = null)=> {
 	// if(symbolFolder != null) {
@@ -142,6 +143,22 @@ let createRootSymbol = (type: string = null, symbolParameters: any = null)=> {
 	reset()
 	return container
 }
+
+let symbolToHash = (symbol: Symbol)=> {
+	let json = symbol.getJSON()
+	let symbolString = JSON.stringify(json)
+	let symbolData = btoa(symbolString)
+	return symbolData
+}
+
+let checkUpdateHash = ()=> {
+	let newHash = symbolToHash(symbol)
+	if(newHash != location.hash.substr(1)) {
+		ignoreHashChange = true
+		location.hash = newHash
+	}
+}
+
 
 let reset = ()=> {
 
@@ -169,6 +186,8 @@ let reset = ()=> {
 		raster = paper.project.activeLayer.rasterize()
 	}
 }
+
+setInterval(checkUpdateHash, 1000)
 
 let onFrame = ()=> {
 
@@ -230,3 +249,26 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	paper.view.onClick = reset
 	paper.view.onResize = reset
 });
+
+let readHash = ()=> {
+	try {
+		let hash = location.hash.substr(1)
+		let json = atob(hash)
+		parameters.symbol = JSON.parse(json)
+		editor.ignoreChange = true
+		editor.setValue(JSON.stringify(parameters, null, 2));
+		editor.clearSelection()
+		let event = new CustomEvent('changeParameters', { detail: { parameters: parameters } })
+		document.dispatchEvent(event)
+	} catch (error) {
+		console.log(error)
+	}
+}
+
+window.addEventListener('hashchange', (event)=> {
+	if(ignoreHashChange) {
+		ignoreHashChange = false
+		return
+	}
+	readHash()
+})
