@@ -73,7 +73,7 @@ let loadDefaultFiles = ()=> {
 }
 
 export let initializeEditor = (parameters: any): any => {
-	
+	$('#json-editor').hide()
 	editor = ace.edit('json-editor');
 	w.editor = editor
 	editor.getSession().setMode('ace/mode/json');
@@ -117,6 +117,11 @@ export let initializeEditor = (parameters: any): any => {
 	})
 	$(window).mouseup( (event: any )=> {
 		draggingEditorOffsetX = null
+	})
+	$(window).resize( (event: any) => {
+		let width = $('#tools').outerWidth()
+		paper.view.viewSize.width = window.innerWidth - width
+		paper.view.viewSize.height = window.innerHeight
 	})
 
 	$('#tools .file-select select').on('change', (event: any)=> {

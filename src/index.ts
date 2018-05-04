@@ -29,7 +29,7 @@ let parametersOld = {
 			scale: 0.2,
 			margin: true,
 			symbol: {
-				type: 'random-symbol',
+				type: 'symbol-list',
 				parameters: {		
 					shapeProbabilities: [{
 						weight: 1,
@@ -80,7 +80,7 @@ let parameters = {
       margin: true,
       scale: 0.13,
       symbol: {
-        type: 'random-symbol',
+        type: 'symbol-list',
         parameters: {
           shapeProbabilities: [
             {
@@ -155,10 +155,11 @@ let checkUpdateHash = ()=> {
 	let newHash = symbolToHash(symbol)
 	if(newHash != location.hash.substr(1)) {
 		ignoreHashChange = true
-		location.hash = newHash
+		// location.hash = newHash
 	}
 }
 
+setInterval(checkUpdateHash, 1000)
 
 let reset = ()=> {
 
@@ -186,8 +187,6 @@ let reset = ()=> {
 		raster = paper.project.activeLayer.rasterize()
 	}
 }
-
-setInterval(checkUpdateHash, 1000)
 
 let onFrame = ()=> {
 
@@ -243,11 +242,15 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	initializeEditor(parameters)
 
 	gui = createGUI(parameters)
+
+	readHash()
 	createRootSymbol()
 
 	paper.view.onFrame = onFrame
 	paper.view.onClick = reset
 	paper.view.onResize = reset
+
+
 });
 
 let readHash = ()=> {

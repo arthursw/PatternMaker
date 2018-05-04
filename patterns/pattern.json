@@ -16,7 +16,7 @@
       "margin": true,
       "scale": 0.2,
       "symbol": {
-        "type": "random-symbol",
+        "type": "symbol-list",
         "parameters": {
           "shapeProbabilities": [
             {

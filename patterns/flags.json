@@ -23,7 +23,7 @@
               "type": "static",
               "nSymbolsToCreate": 5,
               "symbol": {
-                "type": "random-symbol",
+                "type": "symbol-list",
                 "parameters": {
                   "shapeProbabilities": [
                     {

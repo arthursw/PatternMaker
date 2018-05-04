@@ -11,7 +11,7 @@ export let createGUI = (parameters: { generation: string, speed: number, nSymbol
 	gui = new dat.GUI({ autoPlace: false })
 	w.gui = gui
 	
-	$('#gui-container').hide()
+	// $('#gui-container').hide()
 	$('#gui').append(gui.domElement)
 
 	gui.add(parameters, 'generation').options(['animation', 'image']).name('Generation')

@@ -447,6 +447,7 @@ Symbol.addSymbol(PlacerZ, 'scaler')
 export class PlacerCircle extends Placer {
 
 	static defaultParameters = { ...Placer.defaultParameters,
+		nSymbolsToCreate: 6,
 		scale: 0.1,
 		angleOffset: 0
 	}
@@ -1094,4 +1095,3 @@ export class SymbolListPlacer extends Symbol {
 }
 
 Symbol.addSymbol(SymbolListPlacer, 'symbol-list')
-Symbol.addSymbol(SymbolListPlacer, 'random-symbol')
