@@ -52,8 +52,8 @@ export class Symbol implements SymbolInterface {
 	}
 
 	initializeParameters(parameters: any) {
-		this.parameters = parameters
-		let defaultParameters: any = (<typeof Symbol>this.constructor).defaultParameters
+		this.parameters = {... parameters }
+		let defaultParameters: any = {... (<typeof Symbol>this.constructor).defaultParameters }
 		this.copyDefaultParameters(defaultParameters, this.parameters)
 	}
 

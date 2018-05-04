@@ -155,7 +155,7 @@ let checkUpdateHash = ()=> {
 	let newHash = symbolToHash(symbol)
 	if(newHash != location.hash.substr(1)) {
 		ignoreHashChange = true
-		// location.hash = newHash
+		location.hash = newHash
 	}
 }
 
