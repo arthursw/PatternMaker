@@ -114,7 +114,8 @@ export class Circle extends Shape {
 			circle = new paper.Path.Arc(createArc(center, radius, this.parameters.endAngle - this.parameters.startAngle))
 			circle.add(center)
 			circle.closed = true
-			circle.rotation = this.parameters.startAngle
+			circle.pivot = center
+			circle.rotation = -this.parameters.startAngle
 		}
 		this.applyEffects(positions, circle, container)
 		return circle

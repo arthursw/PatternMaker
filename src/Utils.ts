@@ -16,12 +16,12 @@ export function createArc(center: paper.Point, radius: number, angleDegrees: num
             y: center.y
         },
         through: {
-            x: center.x + Math.cos(angleRadians / 2) * radius,
-            y: center.y + Math.sin(angleRadians / 2) * radius
+            x: center.x + Math.cos(-angleRadians / 2) * radius,
+            y: center.y + Math.sin(-angleRadians / 2) * radius
         },
         to: {
-            x: center.x + Math.cos(angleRadians) * radius,
-            y: center.y + Math.sin(angleRadians) * radius
+            x: center.x + Math.cos(-angleRadians) * radius,
+            y: center.y + Math.sin(-angleRadians) * radius
         }
     }
 }
