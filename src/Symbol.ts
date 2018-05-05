@@ -66,6 +66,8 @@ export class Symbol implements SymbolInterface {
 			if(parameters[name] == null) {
 				if(typeof defaultValue === 'object') {
 					parameters[name] = Array.isArray(defaultValue) ? [... defaultValue] : {... defaultValue }
+				} else if(typeof defaultValue === 'function'){
+					parameters[name] = defaultValue()
 				} else {
 					parameters[name] = defaultValue
 				}

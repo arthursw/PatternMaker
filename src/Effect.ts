@@ -61,13 +61,21 @@ export class Effect {
 			return
 		}
 		for(let name in defaultParameters) {
+			let defaultValue = defaultParameters[name]
 			if(parameters[name] == null) {
-				parameters[name] = defaultParameters[name]
+				if(typeof defaultValue === 'object') {
+					parameters[name] = Array.isArray(defaultValue) ? [... defaultValue] : {... defaultValue }
+				} else if(typeof defaultValue === 'function'){
+					parameters[name] = defaultValue()
+				} else {
+					parameters[name] = defaultValue
+				}
 			} else {
-				this.copyDefaultParameters(defaultParameters[name], parameters[name])
+				this.copyDefaultParameters(defaultValue, parameters[name])
 			}
 		}
 	}
+
 
 	getJSON() {
 		return { 
@@ -130,9 +138,9 @@ export class RandomHue extends Effect {
 	static defaultParameters = {
 		target: 'fill',
 		strokeWidth: 1,
-		hue: 180,
-		hueRange: 360,
-		saturation: 1,
+		hue: ()=> 360 * Math.random(),
+		hueRange: ()=> 100 * Math.random(),
+		saturation: ()=> 0.3 + 0.4 * Math.random(),
 		brightness: 1,
 		alpha: 1
 	}
