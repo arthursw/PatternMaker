@@ -8,6 +8,14 @@ export let editor: any = null
 let w: any = window
 w.$ = <any>$;
 
+export let setFileInEditor = (fileName: string)=> {
+	let content = files.get(fileName)
+	if(content != null) {
+		editor.setValue(content)
+		editor.clearSelection()
+	}
+}
+
 let setFile = (fileName: string, content: string, setContentInEditor = true)=> {
 	if(setContentInEditor) {
 		editor.setValue(content)
@@ -24,6 +32,18 @@ let setFile = (fileName: string, content: string, setContentInEditor = true)=> {
 	}
 }
 
+let checkAllDefaultFilesLoaded = ()=> {
+	if(!defaultFilesLoaded) {
+		for(let defaultFile of defaultFiles) {
+			if(files.get(defaultFile) == null) {
+				return false
+			}
+		}
+		defaultFilesLoaded = true
+		document.dispatchEvent(new Event('defaultFilesLoaded'))
+	}
+	return true
+}
 let loadFile = (fileName: string, ignoreIfAlreadyLoaded = false, setContentInEditor = true)=> { 
 	if(ignoreIfAlreadyLoaded && files.get(fileName) != null) {
 		return
@@ -31,6 +51,7 @@ let loadFile = (fileName: string, ignoreIfAlreadyLoaded = false, setContentInEdi
 
 	$.getJSON( location.origin + location.pathname + "/patterns/" + fileName, ( data: any )=> {
 		setFile(fileName, JSON.stringify(data, null, 2), setContentInEditor)
+		checkAllDefaultFilesLoaded()
 	});
 
 }
@@ -61,7 +82,8 @@ let loadFilesFromLocalStorage = ()=> {
 	}
 }
 
-let defaultFiles = ['flags.json', 'grids.json', 'infinite-squares.json', 'simple.json']
+let defaultFiles = ['flags.json', 'grids.json', 'infinite-squares.json', 'simple.json', 'jogl.json']
+let defaultFilesLoaded = false
 
 let loadDefaultFiles = ()=> {
 
@@ -85,6 +107,10 @@ export let initializeEditor = (parameters: any): any => {
 	editor.session.on('change', function(delta: { start: any, end: any, lines: any, action: any}) {
 		if(editor.ignoreChange) {
 			editor.ignoreChange = false
+			if(editor.saveFile) {
+				editor.saveFile = false
+				saveFile('pattern.json', 'application/json', editor.getValue())
+			}
 			return
 		}
 		let parameters = null
@@ -165,7 +191,9 @@ export let initializeEditor = (parameters: any): any => {
 	})
 
 	$('#tools .save .JSON').on('click', (event: any)=> {
-		saveFile('pattern.json', 'application/json', editor.getValue())
+		editor.saveFile = true
+		let e = new CustomEvent('jsonClicked')
+		document.dispatchEvent(e)
 	})
 
 	$('#tools .save .SVG').on('click', (event: any)=> {
@@ -174,5 +202,6 @@ export let initializeEditor = (parameters: any): any => {
 	})
 
 	loadDefaultFiles()
+	
 	return editor
 }

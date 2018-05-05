@@ -1,0 +1,138 @@
+{
+  "generation": "animation",
+  "speed": 500,
+  "nSymbolsPerFrame": 100,
+  "size": {
+    "width": 1000,
+    "height": 1000
+  },
+  "optimizeWithRaster": false,
+  "symbol": {
+    "type": "placer-circle",
+    "parameters": {
+      "nSymbolsToCreate": 4,
+      "symbol": {
+        "type": "symbol-list",
+        "parameters": {
+          "random": false,
+          "shapeProbabilities": [
+            {
+              "type": "rectangle",
+              "parameters": {
+                "width": 1,
+                "height": 1,
+                "effects": []
+              },
+              "weight": 1
+            },
+            {
+              "type": "circle",
+              "parameters": {
+                "radius": 1,
+                "effects": [
+                  {
+                    "type": "random-hue",
+                    "parameters": {
+                      "target": "stroke",
+                      "strokeWidth": 6.5,
+                      "hue": 180,
+                      "hueRange": 360,
+                      "saturation": 1,
+                      "brightness": 0,
+                      "alpha": 1
+                    }
+                  }
+                ]
+              },
+              "weight": 1
+            },
+            {
+              "type": "polygon",
+              "parameters": {
+                "vertices": [
+                  [
+                    0,
+                    0.1
+                  ],
+                  [
+                    1,
+                    0.1
+                  ],
+                  [
+                    0.5,
+                    0.9
+                  ]
+                ],
+                "closed": true,
+                "effects": []
+              },
+              "weight": 1
+            },
+            {
+              "type": "symbol-list",
+              "parameters": {
+                "random": false,
+                "shapeProbabilities": [
+                  {
+                    "type": "placer",
+                    "parameters": {
+                      "nSymbolsToCreate": 2,
+                      "symbol": {
+                        "type": "symbol-list",
+                        "parameters": {
+                          "random": false,
+                          "shapeProbabilities": [
+                            {
+                              "type": "rectangle",
+                              "parameters": {
+                                "width": 0.46,
+                                "height": 1,
+                                "effects": []
+                              },
+                              "weight": 1
+                            },
+                            {
+                              "type": "rectangle",
+                              "parameters": {
+                                "width": 1,
+                                "height": 0.45,
+                                "effects": []
+                              },
+                              "weight": 1
+                            }
+                          ],
+                          "effects": []
+                        }
+                      },
+                      "effects": []
+                    },
+                    "weight": 1
+                  }
+                ],
+                "effects": []
+              },
+              "weight": 1
+            }
+          ],
+          "effects": []
+        }
+      },
+      "scale": 0.1,
+      "angleOffset": 0,
+      "effects": [
+        {
+          "type": "random-hue",
+          "parameters": {
+            "target": "fill",
+            "strokeWidth": 1,
+            "hue": 180,
+            "hueRange": 360,
+            "saturation": 1,
+            "brightness": 0,
+            "alpha": 1
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import * as paper from 'paper'
 
-import { initializeEditor, editor } from './Tools'
+import { initializeEditor, editor, setFileInEditor } from './Tools'
 import { Bounds } from './Bounds';
 import { Symbol, SymbolConstructor } from './Symbol';
 import './Placer';
@@ -10,57 +10,6 @@ import { createGUI } from './GUI';
 
 let w:any = <any>window;
 (<any>window).w = w;
-
-let parametersOld = {
-	generation: 'animation',
-	speed: 500,
-	nSymbolsPerFrame: 100,
-	size: {
-		width: 1000,
-		height: 1000
-	},
-	optimizeWithRaster: false,
-	symbol: {
-		type: 'grid',
-		parameters: {
-			width: 10,
-			height: 10,
-			count: 1,
-			scale: 0.2,
-			margin: true,
-			symbol: {
-				type: 'symbol-list',
-				parameters: {		
-					shapeProbabilities: [{
-						weight: 1,
-						type: 'circle',
-						parameters: {
-							radius: 1
-						}
-					}, {
-						weight: 1,
-						type: 'rectangle',
-						parameters: {
-							width: 1,
-							height: 1
-						}
-					}],
-					effects:[ {
-						type: 'random-palette',
-						parameters: {
-							palette: [
-							'red',
-							'blue',
-							'green',
-							'black'
-							]
-						}
-					} ]
-				}
-			}
-		}
-	}
-}
 
 let parameters = {
   generation: 'animation',
@@ -72,44 +21,24 @@ let parameters = {
   },
   optimizeWithRaster: false,
   symbol: {
-    type: 'grid',
+    type: 'rectangle',
     parameters: {
-      height: 50,
-      width: 50,
-      nSymbolsToCreate: 1,
-      margin: true,
-      scale: 0.13,
-      symbol: {
-        type: 'symbol-list',
-        parameters: {
-          shapeProbabilities: [
-            {
-              type: 'circle',
-              parameters: {
-                radius: 0.75
-              },
-              weight: 1
-            },
-            {
-              type: 'rectangle',
-              parameters: {
-                width: 1,
-                height: 1
-              },
-              weight: 1
-            }
-          ],
-          effects: [{
-            type: 'random-palette',
-            parameters: {
-              palette: [
-                'rgb(107,30,20)',
-                'rgb(178,59,23)'
-              ]
-            }
-          }]
+      width: 1,
+      height: 1,
+      effects: [
+        {
+          type: 'random-hue',
+          parameters: {
+            target: 'fill',
+            strokeWidth: 1,
+            hue: 180,
+            hueRange: 360,
+            saturation: 1,
+            brightness: 0,
+            alpha: 1
+          }
         }
-      }
+      ]
     }
   }
 }
@@ -239,6 +168,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 	w.paper = paper
 
+	if(location.hash.length <= 1) {
+		document.addEventListener('defaultFilesLoaded', (event: any) => {
+			setFileInEditor('jogl.json')
+		})
+	}
+
 	initializeEditor(parameters)
 
 	gui = createGUI(parameters)
@@ -249,13 +184,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	paper.view.onFrame = onFrame
 	paper.view.onClick = reset
 	paper.view.onResize = reset
-
-
 });
 
 let readHash = ()=> {
 	try {
 		let hash = location.hash.substr(1)
+		if(hash.length == 0) {
+			return false
+		}
 		let json = atob(hash)
 		parameters.symbol = JSON.parse(json)
 		editor.ignoreChange = true
@@ -266,6 +202,7 @@ let readHash = ()=> {
 	} catch (error) {
 		console.log(error)
 	}
+	return true
 }
 
 window.addEventListener('hashchange', (event)=> {
