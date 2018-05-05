@@ -62,10 +62,15 @@ export class Symbol implements SymbolInterface {
 			return
 		}
 		for(let name in defaultParameters) {
+			let defaultValue = defaultParameters[name]
 			if(parameters[name] == null) {
-				parameters[name] = defaultParameters[name]
+				if(typeof defaultValue === 'object') {
+					parameters[name] = Array.isArray(defaultValue) ? [... defaultValue] : {... defaultValue }
+				} else {
+					parameters[name] = defaultValue
+				}
 			} else {
-				this.copyDefaultParameters(defaultParameters[name], parameters[name])
+				this.copyDefaultParameters(defaultValue, parameters[name])
 			}
 		}
 	}
@@ -101,6 +106,9 @@ export class Symbol implements SymbolInterface {
 	applyEffects(positions: number[], item: paper.Path, container: Bounds): void {
 		for(let effect of this.getEffects()) {
 			effect.applyEffect(positions, item, container)
+		}
+		if(item.fillColor == null && (item.strokeWidth == 0 || item.strokeColor == null)) {
+			item.fillColor = 'black'
 		}
 	}
 
