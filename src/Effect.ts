@@ -72,7 +72,7 @@ export class Effect {
 	getJSON() {
 		return { 
 			type: (<typeof Symbol>this.constructor).type,
-			parameters: this.parameters,
+			parameters: {... this.parameters},
 		}
 	}
 

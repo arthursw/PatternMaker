@@ -73,8 +73,7 @@ export class Symbol implements SymbolInterface {
 	getJSON() {
 		return { 
 			type: (<typeof Symbol>this.constructor).type,
-			parameters: { ... this.parameters },
-			effects: this.getEffectsJSON()
+			parameters: { ... this.parameters , effects: this.getEffectsJSON() }
 		}
 	}
 

@@ -1077,7 +1077,11 @@ export class SymbolListPlacer extends Symbol {
 				i++
 			}
 		} else {
-			this.currentSymbol = this.symbols[Math.floor(this.currentIndex)]
+			let index = Math.floor(this.currentIndex)
+			if(index >= this.symbols.length) {
+				return null
+			}
+			this.currentSymbol = this.symbols[index]
 			this.currentSymbol.reset(bounds)
 			this.currentIndex += 1 / this.parameters.shapeProbabilities[Math.floor(this.currentIndex)].weight
 			if(this.currentIndex >= this.symbols.length) {
