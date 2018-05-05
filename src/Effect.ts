@@ -209,6 +209,43 @@ export class Noise extends Effect {
 
 Effect.addEffect(Noise, 'noise')
 
+export class Transform extends Effect {
+
+	static defaultParameters = {
+		translationX: 0,
+		translationY: 0,
+		scaleX: 1,
+		scaleY: 1,
+		rotation: 0
+	}
+
+	parameters: {
+		translationX: number,
+		translationY: number,
+		scaleX: number,
+		scaleY: number,
+		rotation: number
+	}
+
+	applyEffect(positions: number[], item: paper.Path, container: Bounds): void {
+		item.position.x += this.parameters.translationX
+		item.position.x += this.parameters.translationY
+		item.scaling.x = this.parameters.scaleX
+		item.scaling.y = this.parameters.scaleY
+		item.rotation = this.parameters.rotation
+	}
+
+	addGUIParameters(gui: dat.GUI) {
+		gui.add(this.parameters, 'translationX').name('Transaltion X')
+		gui.add(this.parameters, 'translationY').name('Transaltion Y')
+		gui.add(this.parameters, 'scaleX').name('Scale X')
+		gui.add(this.parameters, 'scaleY').name('Scale Y')
+		gui.add(this.parameters, 'rotation', 0, 360).name('Rotation')
+	}
+}
+
+Effect.addEffect(Transform, 'transform')
+
 export class Smooth extends Effect {
 
 	applyEffect(positions: number[], item: paper.Path, container: Bounds): void {

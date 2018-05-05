@@ -17,15 +17,6 @@
           "random": false,
           "shapeProbabilities": [
             {
-              "type": "rectangle",
-              "parameters": {
-                "width": 1,
-                "height": 1,
-                "effects": []
-              },
-              "weight": 1
-            },
-            {
               "type": "circle",
               "parameters": {
                 "radius": 1,
@@ -47,6 +38,83 @@
               "weight": 1
             },
             {
+              "type": "symbol-list",
+              "parameters": {
+                "random": false,
+                "shapeProbabilities": [
+                  {
+                    "type": "placer",
+                    "parameters": {
+                      "nSymbolsToCreate": 2,
+                      "symbol": {
+                        "type": "symbol-list",
+                        "parameters": {
+                          "random": false,
+                          "shapeProbabilities": [
+                            {
+                              "type": "rectangle",
+                              "parameters": {
+                                "width": 0.25,
+                                "height": 1,
+                                "effects": []
+                              },
+                              "weight": 1
+                            },
+                            {
+                              "type": "rectangle",
+                              "parameters": {
+                                "width": 1,
+                                "height": 0.25,
+                                "effects": []
+                              },
+                              "weight": 1
+                            }
+                          ],
+                          "effects": [
+                            {
+                              "type": "random-hue",
+                              "parameters": {
+                                "target": "fill",
+                                "strokeWidth": 1,
+                                "hue": 180,
+                                "hueRange": 360,
+                                "saturation": 1,
+                                "brightness": 0,
+                                "alpha": 1
+                              }
+                            },
+                            {
+                              "type": "transform",
+                              "parameters": {
+                                "translationX": 0,
+                                "translationY": 0,
+                                "scaleX": 1,
+                                "scaleY": 1,
+                                "rotation": 45
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      "effects": []
+                    },
+                    "weight": 1
+                  }
+                ],
+                "effects": []
+              },
+              "weight": 1
+            },
+            {
+              "type": "rectangle",
+              "parameters": {
+                "width": 1,
+                "height": 1,
+                "effects": []
+              },
+              "weight": 1
+            },
+            {
               "type": "polygon",
               "parameters": {
                 "vertices": [
@@ -64,51 +132,6 @@
                   ]
                 ],
                 "closed": true,
-                "effects": []
-              },
-              "weight": 1
-            },
-            {
-              "type": "symbol-list",
-              "parameters": {
-                "random": false,
-                "shapeProbabilities": [
-                  {
-                    "type": "placer",
-                    "parameters": {
-                      "nSymbolsToCreate": 2,
-                      "symbol": {
-                        "type": "symbol-list",
-                        "parameters": {
-                          "random": false,
-                          "shapeProbabilities": [
-                            {
-                              "type": "rectangle",
-                              "parameters": {
-                                "width": 0.46,
-                                "height": 1,
-                                "effects": []
-                              },
-                              "weight": 1
-                            },
-                            {
-                              "type": "rectangle",
-                              "parameters": {
-                                "width": 1,
-                                "height": 0.45,
-                                "effects": []
-                              },
-                              "weight": 1
-                            }
-                          ],
-                          "effects": []
-                        }
-                      },
-                      "effects": []
-                    },
-                    "weight": 1
-                  }
-                ],
                 "effects": []
               },
               "weight": 1
