@@ -8,7 +8,7 @@
   },
   "optimizeWithRaster": false,
   "symbol": {
-    "type": "grid",
+    "type": "placer-grid",
     "parameters": {
       "height": 6,
       "width": 6,
@@ -16,11 +16,11 @@
       "margin": true,
       "scale": 0.2,
       "symbol": {
-        "type": "symbol-list",
+        "type": "placer-symbol-list",
         "parameters": {
           "shapeProbabilities": [
             {
-              "type": "grid",
+              "type": "placer-grid",
               "parameters": {
                 "height": 7,
                 "width": 5,

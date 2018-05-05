@@ -21,7 +21,7 @@ let parameters = {
   },
   optimizeWithRaster: false,
   symbol: {
-    type: 'rectangle',
+    type: 'shape-rectangle',
     parameters: {
       width: 1,
       height: 1,

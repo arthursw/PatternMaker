@@ -228,7 +228,7 @@ export class QuadTree extends Placer {
 	}
 }
 
-Symbol.addSymbol(QuadTree, 'quadtree')
+Symbol.addSymbol(QuadTree, 'placer-quadtree')
 
 export class PlacerX extends Placer {
 	
@@ -247,7 +247,7 @@ export class PlacerX extends Placer {
 	}
 }
 
-Symbol.addSymbol(PlacerX, 'line')
+Symbol.addSymbol(PlacerX, 'placer-line')
 
 export class PlacerY extends Placer {
 
@@ -266,7 +266,7 @@ export class PlacerY extends Placer {
 	}
 }
 
-Symbol.addSymbol(PlacerY, 'column')
+Symbol.addSymbol(PlacerY, 'placer-column')
 
 export class RandomPlacerX extends PlacerX {
 	
@@ -297,7 +297,7 @@ export class RandomPlacerX extends PlacerX {
 	}
 }
 
-Symbol.addSymbol(RandomPlacerX, 'random-line')
+Symbol.addSymbol(RandomPlacerX, 'placer-random-line')
 
 export class RandomPlacerY extends PlacerY {
 	
@@ -328,7 +328,7 @@ export class RandomPlacerY extends PlacerY {
 	}
 }
 
-Symbol.addSymbol(RandomPlacerY, 'random-column')
+Symbol.addSymbol(RandomPlacerY, 'placer-random-column')
 
 class IrregularPlacer {
 
@@ -367,7 +367,7 @@ export class IrregularPlacerX extends RandomPlacerX {
 	}
 }
 
-Symbol.addSymbol(IrregularPlacerX, 'irregular-line')
+Symbol.addSymbol(IrregularPlacerX, 'placer-irregular-line')
 
 export class IrregularPlacerY extends RandomPlacerY {
 	
@@ -389,7 +389,7 @@ export class IrregularPlacerY extends RandomPlacerY {
 	}
 }
 
-Symbol.addSymbol(IrregularPlacerY, 'irregular-column')
+Symbol.addSymbol(IrregularPlacerY, 'placer-irregular-column')
 
 export class PlacerZ extends Placer {
 
@@ -442,7 +442,7 @@ export class PlacerZ extends Placer {
 	}
 }
 
-Symbol.addSymbol(PlacerZ, 'scaler')
+Symbol.addSymbol(PlacerZ, 'placer-scaler')
 
 export class PlacerCircle extends Placer {
 
@@ -613,7 +613,7 @@ export class RecursivePlacer extends Placer {
 	}
 }
 
-Symbol.addSymbol(RecursivePlacer, 'recursive-placer')
+Symbol.addSymbol(RecursivePlacer, 'placer-recursive')
 
 export class PlacerXYZ extends PlacerY {
 
@@ -641,11 +641,11 @@ export class PlacerXYZ extends PlacerY {
 		let newParameters = {
 			nSymbolsToCreate: parameters.height != null ? parameters.height : defaultParameters.height,
 			symbol: {
-				type: 'line',
+				type: 'placer-line',
 				parameters: {
 					nSymbolsToCreate: parameters.width ? parameters.width : defaultParameters.width,
 					symbol: {
-						type: 'scaler',
+						type: 'placer-scaler',
 						parameters: {
 							nSymbolsToCreate: parameters.nSymbolsToCreate != null ?  parameters.nSymbolsToCreate : defaultParameters.nSymbolsToCreate,
 							margin: parameters.margin != null ?  parameters.margin : defaultParameters.margin,
@@ -724,7 +724,7 @@ export class PlacerXYZ extends PlacerY {
 w.Placer = Placer
 w.PlacerXYZ = PlacerXYZ
 
-Symbol.addSymbol(PlacerXYZ, 'grid')
+Symbol.addSymbol(PlacerXYZ, 'placer-grid')
 
 export class NoiseGrid extends Placer {
 
@@ -852,7 +852,7 @@ export class NoiseGrid extends Placer {
 	}
 }
 
-Symbol.addSymbol(NoiseGrid, 'noise-grid')
+Symbol.addSymbol(NoiseGrid, 'placer-noise-grid')
 
 export class PlacerMinMax extends Placer {
 	
@@ -1098,4 +1098,4 @@ export class SymbolListPlacer extends Symbol {
 	}
 }
 
-Symbol.addSymbol(SymbolListPlacer, 'symbol-list')
+Symbol.addSymbol(SymbolListPlacer, 'placer-symbol-list')

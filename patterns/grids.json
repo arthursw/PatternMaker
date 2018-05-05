@@ -8,7 +8,7 @@
   },
   "optimizeWithRaster": false,
   "symbol": {
-    "type": "grid",
+    "type": "placer-grid",
     "parameters": {
       "width": 10,
       "height": 10,
@@ -16,19 +16,19 @@
       "scale": 0.2,
       "margin": true,
       "symbol": {
-        "type": "symbol-list",
+        "type": "placer-symbol-list",
         "parameters": {
           "shapeProbabilities": [
             {
               "weight": 4,
-              "type": "circle",
+              "type": "shape-circle",
               "parameters": {
                 "radius": 1
               }
             },
             {
               "weight": 100,
-              "type": "rectangle",
+              "type": "shape-rectangle",
               "parameters": {
                 "width": 1,
                 "height": 1
@@ -36,21 +36,21 @@
             },
             {
               "weight": 1,
-              "type": "polygon-on-box",
+              "type": "shape-polygon-on-box",
               "parameters": {
                 "vertexIndices": [0, 2, 5]
               }
             },
             {
               "weight": 1,
-              "type": "polygon-on-box",
+              "type": "shape-polygon-on-box",
               "parameters": {
                 "vertexIndices": [4, 6, 1]
               }
             },
             {
               "weight": 1,
-              "type": "polygon-on-box",
+              "type": "shape-polygon-on-box",
               "parameters": {
                 "vertexIndices": [0, 6, 3]
               }

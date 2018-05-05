@@ -8,13 +8,13 @@
   },
   "optimizeWithRaster": false,
   "symbol": {
-    "type": "scaler",
+    "type": "placer-scaler",
     "parameters": {
       "nSymbolsToCreate": 50,
       "scale": 0.1,
       "margin": false,
       "symbol": {
-        "type": "rectangle",
+        "type": "shape-rectangle",
         "parameters": {
           "width": 1,
           "height": 1

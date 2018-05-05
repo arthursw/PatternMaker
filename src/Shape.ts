@@ -1,5 +1,6 @@
 import * as paper from 'paper';
 import { Bounds } from './Bounds';
+import { createArc } from './Utils';
 import { Symbol, SymbolConstructor } from './Symbol';
 import { Effect } from './Effect';
 
@@ -59,7 +60,7 @@ export class Rectangle extends Shape {
 
 }
 
-Symbol.addSymbol(Rectangle, 'rectangle')
+Symbol.addSymbol(Rectangle, 'shape-rectangle')
 
 export class RectangleAbsolute extends Rectangle {
 
@@ -76,14 +77,16 @@ export class RectangleAbsolute extends Rectangle {
 	}
 }
 
-Symbol.addSymbol(RectangleAbsolute, 'rectangle-absolute')
+Symbol.addSymbol(RectangleAbsolute, 'shape-rectangle-absolute')
 
 export class Circle extends Shape {
 
-	static defaultParameters = { radius: 1 }
+	static defaultParameters = { radius: 1, startAngle: 0, endAngle: 360 }
 
 	parameters: {
-		radius: number
+		radius: number,
+		startAngle: number,
+		endAngle: number
 	}
 
 	constructor(parameters: { effects?: any, radius?: number }, parent?: Symbol) {
@@ -92,6 +95,8 @@ export class Circle extends Shape {
 
 	addGUIParameters(gui: dat.GUI) {
 		gui.add(this.parameters, 'radius', 0, 1).step(0.01).name('Radius')
+		gui.add(this.parameters, 'startAngle', 0, 360).step(1).name('Start angle')
+		gui.add(this.parameters, 'endAngle', 0, 360).step(1).name('End angle')
 	}
 
 	getRadius(bounds: Bounds) {
@@ -100,22 +105,33 @@ export class Circle extends Shape {
 	}
 
 	next(bounds: Bounds, container: Bounds, positions: number[] = []): paper.Path {
-		let circle = new paper.Path.Circle(bounds.rectangle.center, this.getRadius(bounds))
-		
+		let circle = null
+		let center = bounds.rectangle.center
+		let radius = this.getRadius(bounds)
+		if(this.parameters.startAngle == 0 && this.parameters.endAngle == 360) {
+			circle = new paper.Path.Circle(center, radius)	
+		} else {
+			circle = new paper.Path.Arc(createArc(center, radius, this.parameters.endAngle - this.parameters.startAngle))
+			circle.add(center)
+			circle.closed = true
+			circle.rotation = this.parameters.startAngle
+		}
 		this.applyEffects(positions, circle, container)
 		return circle
 	}
 
 }
 
-Symbol.addSymbol(Circle, 'circle')
+Symbol.addSymbol(Circle, 'shape-circle')
 
 export class CircleAbsolute extends Circle {
 
-	static defaultParameters = { radius: 100 }
+	static defaultParameters = { radius: 100, startAngle: 0, endAngle: 360 }
 
 	addGUIParameters(gui: dat.GUI) {
 		gui.add(this.parameters, 'radius').name('Radius')
+		gui.add(this.parameters, 'startAngle', 0, 360).step(1).name('Start angle')
+		gui.add(this.parameters, 'endAngle', 0, 360).step(1).name('End angle')
 	}
 
 	getRadius(bounds: Bounds) {
@@ -123,7 +139,7 @@ export class CircleAbsolute extends Circle {
 	}
 }
 
-Symbol.addSymbol(CircleAbsolute, 'circle-absolute')
+Symbol.addSymbol(CircleAbsolute, 'shape-circle-absolute')
 
 export class PolygonOnBox extends Shape {
 	
@@ -198,7 +214,7 @@ export class PolygonOnBox extends Shape {
 
 }
 
-Symbol.addSymbol(PolygonOnBox, 'polygon-on-box')
+Symbol.addSymbol(PolygonOnBox, 'shape-polygon-on-box')
 
 export class Polygon extends Shape {
 	
@@ -263,4 +279,4 @@ export class Polygon extends Shape {
 
 }
 
-Symbol.addSymbol(Polygon, 'polygon')
+Symbol.addSymbol(Polygon, 'shape-polygon')
