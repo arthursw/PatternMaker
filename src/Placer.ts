@@ -10,7 +10,7 @@ let w:any = <any>window;
 
 export class Placer extends Symbol {
 
-	static defaultParameters = { nSymbolsToCreate: 3, symbol: { type: 'rectangle', parameters: {} } }
+	static defaultParameters = { nSymbolsToCreate: 3, symbol: { type: 'shape-rectangle', parameters: {} } }
 
 	parameters: {
 		nSymbolsToCreate: number
@@ -893,11 +893,11 @@ export class SymbolListPlacer extends Symbol {
 		random: true,
 		shapeProbabilities: [{
 				weight: 1,
-				type: 'rectangle',
+				type: 'shape-rectangle',
 				parameters: {}
 			}, {
 				weight: 1,
-				type: 'circle',
+				type: 'shape-circle',
 				parameters: {}
 			}]
 	}
@@ -948,7 +948,7 @@ export class SymbolListPlacer extends Symbol {
 	addSymbol() {
 		let shapeProbability: ShapeProbability = {
 			weight: 1,
-			type: 'rectangle',
+			type: 'shape-rectangle',
 			parameters: {}
 		}
 
